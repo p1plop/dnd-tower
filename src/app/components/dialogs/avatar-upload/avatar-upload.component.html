@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Загрузка изображения</h1>
+  <input #fileInput type="file" accept="image/jpeg,image/png,image/gif" (change)="onFileChanged($event)">
+  <button class="upload" mat-raised-button *ngIf="!image" color="primary" (click)="fileInput.click()">
+    <mat-icon>attach_file</mat-icon>
+    Загрузить изображение
+  </button>
+
+  <div class="file" *ngIf="image">
+    <span class="file-name">{{image.name}}</span>
+    <button mat-icon-button color="primary" (click)="deleteImage()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div mat-dialog-actions fxLayoutAlign="space-around">
+    <button mat-button [mat-dialog-close]>Отмена</button>
+    <button mat-button (click)="submit()" [disabled]="!image">Загрузить</button>
+  </div>
+

@@ -1,0 +1,32 @@
+<section id="background" fxLayoutAlign="center">
+    <mat-card class="mat-elevation-z8" fxFlex fxFlex.gt-sm="35%">
+      <form [formGroup]="form" (ngSubmit)="formSubmit()" *ngIf="!loading">
+        <mat-icon class="icon">account_circle</mat-icon>
+        <h3>Регистрация</h3>
+  
+        <mat-form-field>
+          <mat-label>Адрес элекстронной почты</mat-label>
+          <input matInput
+                         formControlName="login"
+                         autocomplete="email"
+                         required>
+        </mat-form-field>
+  
+        <mat-form-field>
+          <mat-label>Пароль</mat-label>
+          <input matInput
+                         type="password"
+                         formControlName="password"
+                         autocomplete="current-password"
+                         required>
+        </mat-form-field>
+  
+        <div fxLayoutAlign="center">
+          <button  mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+            Зарегистрироваться
+          </button>
+        </div>
+      </form>
+      <mat-spinner *ngIf="loading"></mat-spinner>
+    </mat-card>
+  </section>

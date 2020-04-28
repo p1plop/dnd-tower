@@ -1,0 +1,14 @@
+<div>
+  <button mat-icon-button color="primary" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <div fxFlex></div>
+  <button mat-icon-button color="primary" (click)="submit()">
+    <mat-icon>done</mat-icon>
+  </button>
+</div>
+<p class="value">{{data}}</p>
+<div class="buttons" fxLayout="row" fxLayoutAlign="space-around">
+  <button mat-fab color="primary" (click)="decrement()">-</button>
+  <button mat-fab color="primary" (click)="increment()">+</button>
+</div>

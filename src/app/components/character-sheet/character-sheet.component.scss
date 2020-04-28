@@ -1,0 +1,165 @@
+@import "../../my-theme.scss";
+
+.avatar {
+  margin: 10px;
+  mat-icon {
+    color: $primary;
+    height: 128px;
+    width: 128px;
+    font-size: 128px;
+    cursor: pointer;
+  }
+  img {
+    height: 128px;
+    width: 128px;
+    border-radius: 50%;
+    cursor: pointer;
+    object-fit: cover;
+    object-position: top;
+  }
+}
+.head-info {
+  margin: 10px;
+}
+.input-large {
+  font-size: 1.5rem;
+  min-width: 50%;
+}
+
+.row {
+  text-align: center;
+  mat-form-field {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+.spinner {
+  position: absolute;
+  top: 40%;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+}
+.save-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  color: #fff;
+}
+.spells {
+  margin: 10px;
+}
+
+.stats {
+  margin: 10px;
+  height: fit-content;
+  .stats-element {
+    cursor: pointer;
+    width: 110px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.35);
+    display: block;
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 25px;
+    padding-top: 10px;
+    background: $primary;
+    height: 110px;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  
+    .value {
+      width: 50%;
+      height: 35px;
+      border-radius: 10px;
+      color: $primary;
+      background: #fff;
+      font-size: 32px;
+      padding-top: 10px;
+      margin: auto;
+      margin-top: 15px;
+    }
+  
+    .modificator {
+      font-size: 16px;
+      margin: 0px;
+      margin-top: 5px;
+    }
+  }
+}
+.parameter-with-title {
+  .value {
+      box-shadow: 0 0 5px rgba(0,0,0,0.35);
+      color: #fff;
+      background: $primary;
+      height: 18px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-right: 15px;
+      padding-left: 15px;
+      border-radius: 50px;
+      cursor: pointer;
+  }
+  .name {
+      padding-left: 10px;
+      font-size: 18px;
+  }
+}
+.skills-col > * {
+  margin: 10px;
+}
+.skill {
+  mat-checkbox {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  mat-form-field {
+    width: 30px;
+    padding-top: 0px;
+    text-align: center;
+    margin-top: 0px;
+  }
+}
+.round-param {
+  cursor: pointer;
+    .param {
+        padding: 40px;
+        margin: 10px;
+        position: relative;
+        background: $primary;
+        border-radius: 50px;
+        box-shadow: 0 0 5px rgba(0,0,0,0.35);
+    }
+    .value {
+        position: absolute;
+        top: 35%;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        color: #fff;
+        font-size: 28px;
+    }
+    span {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+}
+.hp-card {
+  margin: 10px;
+  p {
+    text-align: center;
+    font-size: 18px;
+  }
+}
+.money mat-form-field {
+  width: 80px;
+}
+.inventory {
+  width: 70%;
+}
+.inventory-card, .combat {
+  margin: 10px;
+}

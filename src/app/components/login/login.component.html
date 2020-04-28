@@ -1,0 +1,41 @@
+<section id="background" fxLayoutAlign="center">
+  <mat-card class="mat-elevation-z8" fxFlex fxFlex.gt-sm="35%">
+    <form [formGroup]="form" (ngSubmit)="formSubmit()" *ngIf="!loading">
+      <mat-icon class="icon">account_circle</mat-icon>
+      <h3>Авторизация</h3>
+
+      <mat-form-field>
+        <mat-label>Адрес элекстронной почты</mat-label>
+        <input matInput
+                       formControlName="login"
+                       autocomplete="email"
+                       required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Пароль</mat-label>
+        <input matInput
+                       type="password"
+                       formControlName="password"
+                       autocomplete="current-password"
+                       required>
+      </mat-form-field>
+
+      <div fxLayoutAlign="space-around">
+        <button class="login"  mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+          Войти
+        </button>
+
+        <button mat-icon-button type="button" (click)="googleAuth()">
+          <mat-icon svgIcon="google"></mat-icon>
+        </button>
+      </div>
+
+      <div class="to-registration">
+        <p>Нет учетной записи?</p>
+        <p><a routerLink="/registration">Зарегестрируйте</a> её прямо сейчас!</p>
+      </div>
+    </form>
+    <mat-spinner *ngIf="loading"></mat-spinner>
+  </mat-card>
+</section>

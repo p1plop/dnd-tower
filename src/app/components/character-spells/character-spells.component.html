@@ -1,0 +1,33 @@
+<button mat-button color="primary" routerLink="../">
+  <mat-icon>chevron_left</mat-icon>
+  Назад к персонажу
+</button>
+<h1 class="page-title">Список заклинаний</h1>
+
+<div *ngIf="!loading" fxLayout.gt-xs="row" fxLayout.lt-sm="column" fxLayoutAlign="space-around">
+  <mat-action-list *ngIf="characterSpells.length" fxFlex.gt-xs="32%">
+
+    <ng-container *ngFor="let spell of characterSpells; let i = index">
+      <div mat-subheader *ngIf="i === 0 || characterSpells[i-1].level !== spell.level">
+        {{getSubheader(spell.level)}}
+      </div>
+
+      <mat-list-item class="spell" (click)="viewSpell(spell)">
+        <mat-icon mat-list-icon [svgIcon]="getIconName(spell.school)"></mat-icon>
+        <div mat-line>{{spell.nameRu}}</div>
+        <div mat-line>{{spell.school}}</div>
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+    </ng-container>
+  </mat-action-list>
+
+  <div *ngIf="!characterSpells.length" class="no-data">
+    Список заклинаний персонажа пуст
+  </div>
+
+  <button color="primary" mat-fab class="plus-btn" (click)="addSpell()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+<mat-spinner class="spinner" *ngIf="loading"></mat-spinner>

@@ -1,0 +1,53 @@
+@import '../../my-theme.scss';
+
+.page-title {
+    text-align: center;
+    margin: 20px;
+}
+
+.create-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+}
+
+mat-spinner {
+    position: absolute;
+    top: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+}
+.character-card {
+    display: inline-block;
+    margin-bottom: 2rem;
+}
+.mat-card {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 70vh;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.mat-card-content {
+    display: flex;
+    flex: 1;
+}
+.empty-list {
+    flex: auto;
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.5);
+}
+.mat-card-image {
+    object-fit: cover; /*this makes the image in src fit to the size specified below*/
+    object-position: top;
+    width: 100%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+    height: 80%;
+    margin: auto;
+    border-radius: 10px;
+}
+.main {
+    margin: 10px;
+}

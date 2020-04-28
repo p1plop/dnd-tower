@@ -1,0 +1,23 @@
+.page-title {
+  text-align: center;
+  margin: 20px;
+}
+.spinner {
+  position: absolute;
+  top: 40%;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+}
+.no-data {
+  text-align: center;
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.5);
+}
+.plus-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  color: #fff;
+}

@@ -1,0 +1,25 @@
+<h1 class="page-title">Список персонажей</h1>
+<section>
+  <div fxFlex fxLayout.gt-xs="row" fxLayout.lt-sm="column" fxLayoutAlign="space-around" >
+    <mat-card *ngFor="let character of characters" fxFlex.gt-xs="32%" class="character-card">
+      <mat-card-header>
+        <mat-card-title>{{character.name}}</mat-card-title>
+        <mat-card-subtitle>{{character.classLevel}}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image
+           [src]="character.imagePath ? character.imagePath : noImagePath"
+           alt="Изображение персонажа">
+      <mat-card-actions>
+        <button [routerLink]="['/character', character.id]" mat-button>Открыть</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <p class="empty-list" *ngIf="characters && !characters.length">
+    Похоже, что у вас пока что нет персонажей.
+  </p>
+  <mat-spinner *ngIf="!characters"></mat-spinner>
+</section>
+
+<button mat-fab color="primary" class="create-btn" (click)="createCharacter()">
+  <mat-icon>add</mat-icon>
+</button>

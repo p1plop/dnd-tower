@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>{{data.viewedSpell.nameRu}} ({{data.viewedSpell.nameEng}})</h1>
+<div mat-dialog-content>
+  <p><b>Уровень: </b>{{data.viewedSpell.level === 0 ? 'Заговор' : data.viewedSpell.level}}</p>
+  <p><b>Школа: </b>{{data.viewedSpell.school}}</p>
+  <p><b>Время накладывания: </b>{{data.viewedSpell.castTime}}</p>
+  <p><b>Дистанция: </b>{{data.viewedSpell.distantion}}</p>
+  <p><b>Компоненты: </b>{{data.viewedSpell.components}}</p>
+  <p><b>Длительность: </b>{{data.viewedSpell.duration}}</p>
+  <p><b>Классы: </b>{{displayClasses(data.viewedSpell.classes)}}</p>
+  <p><b>Источник: </b>{{data.viewedSpell.source}}</p>
+  <div class="description-title">ОПИСАНИЕ</div>
+  <div class="description" [innerHtml]="data.viewedSpell.description"></div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]>Закрыть</button>
+  <button mat-button (click)="delete()" color="error">Удалить</button>
+</div>

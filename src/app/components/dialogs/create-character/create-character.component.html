@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>Создание персонажа</h1>
+<form [formGroup]="form" fxLayout="column" (ngSubmit)="formSubmit()">
+  <mat-form-field>
+    <mat-label>Имя персонажа</mat-label>
+    <input matInput formControlName="name">
+  </mat-form-field>
+
+  <input #fileInput type="file" accept="image/jpeg,image/png,image/gif" (change)="onFileChanged($event)">
+  <button mat-raised-button *ngIf="!image" type="button" color="primary" (click)="fileInput.click()">
+    <mat-icon>attach_file</mat-icon>
+    Загрузить изображение
+  </button>
+
+  <div class="file" *ngIf="image">
+    <span class="file-name">{{image.name}}</span>
+    <button mat-icon-button (click)="deleteImage()" color="primary" type="button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div mat-dialog-actions fxLayoutAlign="space-around">
+    <button mat-button type="button" [mat-dialog-close]>Отмена</button>
+    <button mat-button type="submit" [disabled]="form.invalid">Создать</button>
+  </div>
+</form>

@@ -1,0 +1,47 @@
+<h1 mat-dialog-title>Добавление заклинаний</h1>
+
+<div mat-dialog-content>
+  <mat-form-field class="filter-string">
+    <mat-label>Фильтрация по имени</mat-label>
+    <input matInput autocomplete="off" (keyup)="applyFilter($event)">
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox color="primary"
+                      (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let spell">
+        <mat-checkbox color="primary"
+                      (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(spell) : null"
+                      [checked]="selection.isSelected(spell)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Название </th>
+      <td mat-cell *matCellDef="let spell"> {{spell.nameRu}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let spell; columns: displayedColumns;"
+      (click)="selection.toggle(spell)">
+    </tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]>Отмена</button>
+  <button mat-button
+          [disabled]="selection.isEmpty()"
+          [mat-dialog-close]="selection.selected">
+    Добавить
+  </button>
+</div>

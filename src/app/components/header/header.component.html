@@ -1,0 +1,39 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button (click)="snav.toggle()" *ngIf="authService.isLoggedIn">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <h1 routerLink="">D&D Tower</h1>
+    <span class="spacer"></span>
+    <button routerLink="/login" mat-button *ngIf="!authService.isLoggedIn">Войти</button>
+</mat-toolbar>
+<mat-sidenav-container>
+    <mat-sidenav id="app-header" #snav [fixedInViewport]="true">
+        <mat-toolbar id="sidenav-title" color="primary">
+            <h1>Меню</h1>
+        </mat-toolbar>
+        <mat-nav-list>
+            <a mat-list-item routerLink="/characters" (click)="snav.toggle()">
+                <mat-icon matListIcon>people</mat-icon>
+                <span matLine>Мои персонажи</span>
+            </a>
+            <a mat-list-item>
+                <mat-icon matListIcon>exit_to_app</mat-icon>
+                <span matLine (click)="snav.toggle(); logout()">Выйти</span>
+            </a>
+        </mat-nav-list>
+
+        <div fxLayoutAlign="space-around">
+            <mat-slide-toggle (change)="changeTheme($event)"
+                              [checked]="themeService.currentTheme === 'dark-theme'"
+                              class="theme-btn"
+                              color="primary">
+                <mat-icon>invert_colors</mat-icon>
+                <span>Тёмная тема</span>
+            </mat-slide-toggle>
+        </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content id="content-wrap">
+        <ng-content></ng-content>
+    </mat-sidenav-content>
+</mat-sidenav-container>

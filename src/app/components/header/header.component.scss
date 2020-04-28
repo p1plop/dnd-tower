@@ -1,0 +1,30 @@
+@import "../../my-theme.scss";
+
+h1 {
+    cursor: pointer;
+}
+mat-toolbar {
+    height: 64px;
+}
+mat-sidenav-container {
+    height: calc(100% - 64px);
+}
+.spacer {
+    flex: 1 1 auto;
+}
+mat-sidenav {
+    width: 250px;
+}
+mat-nav-list {
+    mat-icon {
+        color: $primary;
+        order: 10;
+    }
+}
+.theme-btn {
+    position: absolute;
+    bottom: 25px;
+    .mat-icon {
+        vertical-align: bottom;
+    }
+}

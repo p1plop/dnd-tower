@@ -1,0 +1,108 @@
+{
+  "configVersion": 1,
+  "timestamp": 1587329524800,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/5-es2015.bc3e6c9602b5be79b90c.js",
+        "/5-es5.bc3e6c9602b5be79b90c.js",
+        "/favicon.ico",
+        "/index.html",
+        "/main-es2015.ba649c86656fafd27b2f.js",
+        "/main-es5.ba649c86656fafd27b2f.js",
+        "/manifest.webmanifest",
+        "/polyfills-es2015.442fa3cc45520cc0d518.js",
+        "/polyfills-es5.fd3af48698f9b02947d9.js",
+        "/runtime-es2015.b30857b68b5464ad0262.js",
+        "/runtime-es5.b30857b68b5464ad0262.js",
+        "/styles.e8d8dc049f0da04ac48c.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "/assets/icons/icon-128x128.png",
+        "/assets/icons/icon-144x144.png",
+        "/assets/icons/icon-152x152.png",
+        "/assets/icons/icon-192x192.png",
+        "/assets/icons/icon-384x384.png",
+        "/assets/icons/icon-512x512.png",
+        "/assets/icons/icon-72x72.png",
+        "/assets/icons/icon-96x96.png",
+        "/assets/icons/iphone-icon.png",
+        "/assets/images/abjuration.svg",
+        "/assets/images/conjuration.svg",
+        "/assets/images/divination.svg",
+        "/assets/images/enchantment.svg",
+        "/assets/images/evocation.svg",
+        "/assets/images/google_logo.svg",
+        "/assets/images/illusion.svg",
+        "/assets/images/launch.png",
+        "/assets/images/logo_big.png",
+        "/assets/images/necromancy.svg",
+        "/assets/images/transmutation.svg"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/5-es2015.bc3e6c9602b5be79b90c.js": "4bd95cfdf128c6fadc1814101ef38378d84e1fbf",
+    "/5-es5.bc3e6c9602b5be79b90c.js": "4bd95cfdf128c6fadc1814101ef38378d84e1fbf",
+    "/assets/icons/icon-128x128.png": "011887a38582c153f11399d2f303aa45cc8d59bf",
+    "/assets/icons/icon-144x144.png": "60e907b5fd0a2bfb38d293ff5297252634f25252",
+    "/assets/icons/icon-152x152.png": "f856c0e0d92216679964192fc4a4118859236e02",
+    "/assets/icons/icon-192x192.png": "b338504c8ad0e887e03c31bc2ba14502c1def839",
+    "/assets/icons/icon-384x384.png": "5e1b3df23d4e787b002ce97c3d953984d36eb436",
+    "/assets/icons/icon-512x512.png": "462c081719e912bccaefdfa9849e482adfa29ebb",
+    "/assets/icons/icon-72x72.png": "b2768bc6f23ed0fe68badb63ccdf660e2ce2e91d",
+    "/assets/icons/icon-96x96.png": "f446cafd9a02dcc2b3a3ac80e2b1692367cab5e9",
+    "/assets/icons/iphone-icon.png": "903f908016c85530503529a5b45cb46f5265e857",
+    "/assets/images/abjuration.svg": "849ac44e3de5fcde0dcd8796f4a74d041c62d7f0",
+    "/assets/images/conjuration.svg": "bc50727f30c303e0d021574ca2006c620470b352",
+    "/assets/images/divination.svg": "5c5e73a2dd6f8216a3dd2c8ea32de8b02ffaa5f2",
+    "/assets/images/enchantment.svg": "d1a16019fb645a2a12c32ee0cab770d27728b3f6",
+    "/assets/images/evocation.svg": "46c01e9adf2cf21354edcaf1609109e8a6680c16",
+    "/assets/images/google_logo.svg": "ff7b24bc2ddc6a25a42770c64314a64943b8cae7",
+    "/assets/images/illusion.svg": "4ec469042f9042a8133d7a0a0a5e62289172d4b4",
+    "/assets/images/launch.png": "ad672e9117f94def4e3b32ad9ec561ed1b667ec3",
+    "/assets/images/logo_big.png": "edef586c74f95cbe586eb5d0753b670259f4ccbc",
+    "/assets/images/necromancy.svg": "2f59f8113b6d17b82acdb5bbc621974566404756",
+    "/assets/images/transmutation.svg": "b9758f160f430d746e608c7f05213222c4b0fa51",
+    "/favicon.ico": "307acae6831b00460c2a1b8299cc18c7243049ef",
+    "/index.html": "a0f1d79ad3f42616bd4d91cce154fbccfdd83620",
+    "/main-es2015.ba649c86656fafd27b2f.js": "3bd7e16dd3b6c690a51684a4e392132919dc2f38",
+    "/main-es5.ba649c86656fafd27b2f.js": "e75d0eccca36feb52aaea695dad663131d18a284",
+    "/manifest.webmanifest": "13c879247b917c160bb18344c0c5184c1e75555e",
+    "/polyfills-es2015.442fa3cc45520cc0d518.js": "8779ed8d9bf0580e1b50b352a9b8fd520be24433",
+    "/polyfills-es5.fd3af48698f9b02947d9.js": "29c3dfd16faa921dd49165f318f9eed12a2f3be7",
+    "/runtime-es2015.b30857b68b5464ad0262.js": "13b2a405540d3168ac5d6e5fcd4aeef23c84b903",
+    "/runtime-es5.b30857b68b5464ad0262.js": "1eeaf4d34eccaee484a1cde417a7c141d8958fa2",
+    "/styles.e8d8dc049f0da04ac48c.css": "5f95f31b9cd3f1aed719cbbc773cd5a46ce5afbb"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}

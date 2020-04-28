@@ -1,0 +1,192 @@
+<form [formGroup]="form" *ngIf="!loading" (ngSubmit)="formSubmit()">
+  <div class="avatar" fxLayoutAlign="center center">
+    <mat-icon (click)="editAvatar()" *ngIf="!form.value.imagePath">account_circle</mat-icon>
+    <img (click)="editAvatar()" *ngIf="form.value.imagePath" [src]="form.value.imagePath">
+  </div>
+  <div fxLayoutAlign="center center">
+    <mat-card class="head-info" fxFlex.gt-xs="70%">
+      <mat-card-content fxLayoutAlign="space-around" fxLayout.lt-sm="column">
+        <mat-form-field class="input-large">
+          <input matInput required placeholder="Имя персонажа" formControlName="name">
+        </mat-form-field>
+
+        <div class="center-wrap">
+          <div class="row">
+            <mat-form-field>
+              <input matInput placeholder="Класс и уровень" formControlName="classLevel">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Раса" formControlName="race">
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field>
+              <input matInput placeholder="Предыстория" formControlName="background">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Мировоззрение" formControlName="alignment">
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div fxLayout.gt-xs="row" class="main-content">
+    <mat-card class="stats" fxFlex.gt-xs="140px">
+      <mat-card-content fxLayout.gt-xs="column" fxLayout.lt-sm="row wrap">
+        <div *ngFor="let stat of statsNames" class="stats-element" (click)="editStat(stat.key, 'stats')">
+          <span>{{stat.value}}</span>
+          <p class="value">{{getStat(stat.key, 'stats')}}</p>
+          <p class="modificator">{{calulateModificator(stat.key)}}</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <div class="skills-col">
+      <mat-card>
+        <mat-card-content>
+          <div class="parameter-with-title" fxLayout="row" fxLayoutAlign="start center">
+            <span (click)="editStat('inspiration')" class="value">{{getStat('inspiration')}}</span>
+            <span class="name">Вдохновение</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-content>
+          <div class="parameter-with-title" fxLayout="row" fxLayoutAlign="start center">
+            <span (click)="editStat('proficiencyBonus')"
+              class="value">+{{getStat('proficiencyBonus')}}</span>
+            <span class="name">Бонус мастерства</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-content>
+          <div class="parameter-with-title" fxLayout="row" fxLayoutAlign="start center">
+            <span (click)="editStat('passivePerception')"
+              class="value">{{getStat('passivePerception')}}</span>
+            <span class="name">Внимательность (пасс.)</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-expansion-panel formGroupName="savingThrows">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Спасброски
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ng-container *ngFor="let stat of statsNames">
+          <div class="skill" [formGroupName]="stat.key">
+            <mat-checkbox color="primary" formControlName="proficiency">
+              {{stat.value}}
+            </mat-checkbox>
+            <mat-form-field>
+              <input matInput formControlName="modificator" type="number">
+            </mat-form-field>
+            <span>{{calculateSkillTotalValue(stat.key, 'savingThrows')}}</span>
+          </div>
+        </ng-container>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel formGroupName="skills">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Навыки
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ng-container *ngFor="let skill of skillsNames">
+          <div class="skill" [formGroupName]="skill.key">
+            <mat-checkbox color="primary" formControlName="proficiency">
+              {{skill.value}}
+            </mat-checkbox>
+            <mat-form-field>
+              <input matInput formControlName="modificator" type="number">
+            </mat-form-field>
+            <span>{{calculateSkillTotalValue(skill.key, 'skills')}}</span>
+          </div>
+        </ng-container>
+      </mat-expansion-panel>
+    </div>
+
+    <div fxFlex.gt-xs class="main">
+      <mat-card class="combat" fxLayout="row" fxLayoutAlign="center">
+        <div class="round-param" (click)="editStat('ac')">
+          <div class="param">
+            <span class="value">{{form.value.ac}}</span>
+          </div>
+          <span>КД</span>
+        </div>
+        <div class="round-param" (click)="editStat('iniciative')">
+          <div class="param">
+            <span class="value">{{form.value.iniciative}}</span>
+          </div>
+          <span>Инициатива</span>
+        </div>
+        <div class="round-param" (click)="editStat('speed')">
+          <div class="param">
+            <span class="value">{{form.value.speed}}</span>
+          </div>
+          <span>Скорость</span>
+        </div>
+      </mat-card>
+  
+      <mat-card fxLayoutAlign="space-around" fxLayout="column" class="hp-card">
+        <mat-form-field>
+          <input matInput type="number" placeholder="Очки Здоровья макс." formControlName="maxHp">
+        </mat-form-field>
+  
+        <p>Текущее здоровье</p>
+        <p>{{form.value.currentHp}}</p>
+        <mat-slider formControlName="currentHp"
+                    color="primary"
+                    [tickInterval]="1"
+                    [max]="form.value.maxHp"
+                    thumbLabel>
+        </mat-slider>
+      </mat-card>
+      <mat-card class="inventory-card" fxLayout="row" fxLayoutAlign="space-between" formGroupName="inventory">
+        <div>
+          <div fxLayout="column" class="money">
+            <mat-form-field>
+              <input matInput placeholder="Медь" formControlName="copper">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Серебро" formControlName="silver">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Золото" formControlName="gold">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Электрум" formControlName="electrum">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Платина" formControlName="platinum">
+            </mat-form-field>
+          </div>
+        </div>
+        <mat-form-field class="inventory">
+          <textarea formControlName="items" matInput placeholder="Снаряжение" matTextareaAutosize
+            matAutosizeMinRows=16 matAutosizeMaxRows=16></textarea>
+        </mat-form-field>
+      </mat-card>
+
+      <div class="spells" fxLayoutAlign="space-around">
+        <button color="primary" type="button" mat-raised-button routerLink="spells">
+          <mat-icon>menu_book</mat-icon>
+          Список заклинаний
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <button color="primary" type="submit" [disabled]="form.invalid" mat-fab class="save-btn">
+    <mat-icon>save</mat-icon>
+  </button>
+
+  
+</form>
+<mat-spinner class="spinner" *ngIf="loading"></mat-spinner>

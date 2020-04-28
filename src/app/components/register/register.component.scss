@@ -1,0 +1,42 @@
+@import "../../my-theme.scss";
+
+#background {
+    background: url("https://firebasestorage.googleapis.com/v0/b/dnd-tower.appspot.com/o/registration_image.jpg?alt=media&token=983c5734-3680-4c35-8e6a-efd6d291f1d5") right;
+    height: 100%;
+    -webkit-background-size: cover;
+     -moz-background-size: cover;
+      -o-background-size: cover;
+       background-size: cover;
+       padding: 30px;
+}
+mat-card {
+    height: 500px;
+    h3 {
+        text-align: center;
+        font-size: 1.25rem;
+    }
+}
+
+mat-form-field {
+    width: 100%;
+    input {
+        font-size: 18px;
+    }
+    margin-bottom: 20px;
+}
+.icon {
+    display: block;
+    margin: auto;
+    font-size: 75px;
+    width: 75px;
+    height: 75px;
+    color: $primary;
+}
+button {
+    margin-top: 100px;
+    width: -webkit-fill-available;
+}
+:host mat-spinner {
+    margin: auto;
+    margin-top: 150px;
+}

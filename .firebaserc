@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "dnd-tower": {
+      "hosting": {
+        "dnd-tower": [
+          "dnd-tower"
+        ]
+      }
+    }
+  }
+}

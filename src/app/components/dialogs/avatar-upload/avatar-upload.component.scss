@@ -1,0 +1,17 @@
+input[type=file] {
+  display: none;
+}
+.file-name {
+  width: 80%;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.file {
+  display: inherit;
+}
+.upload {
+  display: block;
+  margin: auto;
+}
