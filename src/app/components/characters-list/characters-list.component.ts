@@ -21,7 +21,15 @@ export class CharactersListComponent implements OnInit {
 
   ngOnInit(): void {
     this.charactersService.getCharacters().subscribe(characters => {
-      this.characters = characters;
+      this.characters = characters.sort((a, b) => {
+        if (a.name > b.name) {
+          return 1;
+        }
+        if (b.name > a.name) {
+          return -1;
+        }
+        return 0;
+      });
     });
   }
 

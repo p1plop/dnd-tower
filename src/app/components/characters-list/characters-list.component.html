@@ -1,6 +1,6 @@
 <h1 class="page-title">Список персонажей</h1>
 <section>
-  <div fxFlex fxLayout.gt-xs="row" fxLayout.lt-sm="column" fxLayoutAlign="space-around" >
+  <div fxFlex fxLayout.gt-xs="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="space-around">
     <mat-card *ngFor="let character of characters" fxFlex.gt-xs="32%" class="character-card">
       <mat-card-header>
         <mat-card-title>{{character.name}}</mat-card-title>

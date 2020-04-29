@@ -163,7 +163,7 @@ export class CharacterSheetComponent implements OnInit {
     const value = this.form.get('stats').get(fieldName).value;
 
     const result = Math.floor((value - 10) / 2);
-    return `${result >= 0 ? '+' : '-'}${result}`;
+    return `${result >= 0 ? '+' : ''}${result}`;
   }
 
   calculateSkillTotalValue(fieldName: string, sectionName: string) {

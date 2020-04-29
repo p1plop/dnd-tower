@@ -32,17 +32,19 @@
     </mat-card>
   </div>
 
-  <div fxLayout.gt-xs="row" class="main-content">
-    <mat-card class="stats" fxFlex.gt-xs="140px">
-      <mat-card-content fxLayout.gt-xs="column" fxLayout.lt-sm="row wrap">
-        <div *ngFor="let stat of statsNames" class="stats-element" (click)="editStat(stat.key, 'stats')">
-          <span>{{stat.value}}</span>
-          <p class="value">{{getStat(stat.key, 'stats')}}</p>
+  <mat-card class="stats" fxLayout.gt-xs="column">
+    <mat-card-content fxLayout.lt-sm="row wrap">
+      <div *ngFor="let stat of statsNames" fxLayout="column" class="wrapper">
+        <div class="stats-element" (click)="editStat(stat.key, 'stats')">
+          <p class="name">{{stat.value}}</p>
           <p class="modificator">{{calulateModificator(stat.key)}}</p>
+          <p class="value">{{getStat(stat.key, 'stats')}}</p>
         </div>
-      </mat-card-content>
-    </mat-card>
+      </div>
+    </mat-card-content>
+  </mat-card>
 
+  <div fxLayout.gt-xs="row" class="main-content">
     <div class="skills-col">
       <mat-card>
         <mat-card-content>

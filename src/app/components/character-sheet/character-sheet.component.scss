@@ -48,17 +48,34 @@
   color: #fff;
 }
 .spells {
-  margin: 10px;
+  margin: 30px;
 }
 
 .stats {
   margin: 10px;
   height: fit-content;
+  mat-card-content {
+    display: flex;
+    justify-content: space-around;
+  }
+  .wrapper {
+    width: 110px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .name {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 0;
+    font-size: 10px;
+    color: #fff;
+  }
   .stats-element {
     cursor: pointer;
     width: 110px;
     box-shadow: 0 0 5px rgba(0,0,0,0.35);
-    display: block;
+    display: inline-block;
     color: #fff;
     font-size: 14px;
     text-align: center;
@@ -70,21 +87,25 @@
     margin-top: 5px;
     margin-bottom: 5px;
   
-    .value {
+    .modificator {
       width: 50%;
       height: 35px;
-      border-radius: 10px;
-      color: $primary;
-      background: #fff;
-      font-size: 32px;
+      color: #fff;
+      font-size: 46px;
       padding-top: 10px;
       margin: auto;
-      margin-top: 15px;
+      margin-top: 5px;
     }
   
-    .modificator {
-      font-size: 16px;
-      margin: 0px;
+    .value {
+      font-size: 18px;
+      color: $primary;
+      width: 40%;
+      height: 25px;
+      padding-top: 5px;
+      margin: auto;
+      border-radius: 10px;
+      background: #fff;
       margin-top: 5px;
     }
   }
