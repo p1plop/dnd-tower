@@ -17,6 +17,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -45,6 +48,8 @@ import { CharacterSpellsComponent } from './components/character-spells/characte
 import { ViewSpellComponent } from './components/dialogs/view-spell/view-spell.component';
 import { AddSpellComponent } from './components/dialogs/add-spell/add-spell.component';
 import { ConfirmationComponent } from './components/dialogs/confirmation/confirmation.component';
+import { BattleMapComponent } from './components/battle-map/battle-map.component';
+import { EditMapUnitComponent } from './components/dialogs/edit-map-unit/edit-map-unit.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +67,9 @@ import { ConfirmationComponent } from './components/dialogs/confirmation/confirm
     CharacterSpellsComponent,
     ViewSpellComponent,
     AddSpellComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    BattleMapComponent,
+    EditMapUnitComponent
   ],
   imports: [
     BrowserModule,
@@ -91,6 +98,9 @@ import { ConfirmationComponent } from './components/dialogs/confirmation/confirm
     MatSliderModule,
     MatTableModule,
     MatPaginatorModule,
+    MatTooltipModule,
+    DragDropModule,
+    ScrollingModule,
     HttpClientModule,
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })

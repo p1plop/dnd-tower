@@ -1,0 +1,50 @@
+<h1 class="page-title">Карта сражений</h1>
+
+<div fxLayout.gt-xs="row" fxLayout.lt-sm="column" fxLayoutAlign="space-around">
+  <div class="map-wraper">
+    <div class="map">
+      <div *ngFor="let unit of map.units; let i=index"
+           [ngStyle]="getUnitStyle(unit)"
+           cdkDrag
+           (cdkDragEnded)="dropUnit($event, i)"
+           [matTooltip]="unit.name"
+           matTooltipTouchGestures="on"
+           cdkDragBoundary=".map">
+      </div>
+      <p class="no-image" *ngIf="!map.image">Изображение отсутствует</p>
+      <img *ngIf="map.image" [src]="map.image">
+    </div>
+  </div>
+  
+  <div class="units-list" fxFlex.gt-xs="30%" *ngIf="map.image && isOwner">
+    <h3 class="center">Список юнитов</h3>
+    <mat-list role="list">
+      <mat-list-item *ngFor="let unit of map.units; let i=index" role="listitem">
+        <span class="unit-name">{{unit.name}}</span>
+        <div class="unit-actions">
+          <button mat-icon-button color="primary" (click)="editUnit(i)">
+            <mat-icon>create</mat-icon>
+          </button>
+          <button mat-icon-button color="error" (click)="removeUnit(i)">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="center" class="upload" *ngIf="isOwner" (click)="uploadImage()">
+  <button mat-raised-button color="primary">
+    {{map.image ? 'Изменить' : 'Загрузить'}} изображение
+  </button>
+</div>
+
+<button color="primary"
+        mat-fab
+        class="add-btn"
+        (click)="addUnit()"
+        [disabled]="!map.image"
+        *ngIf="isOwner">
+  <mat-icon>add</mat-icon>
+</button>

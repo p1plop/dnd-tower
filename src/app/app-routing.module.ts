@@ -8,6 +8,7 @@ import { LoggedInGuard } from './guards/logged-in.guard';
 import { RegisterComponent } from './components/register/register.component';
 import { CharacterSheetComponent } from './components/character-sheet/character-sheet.component';
 import { CharacterSpellsComponent } from './components/character-spells/character-spells.component';
+import { BattleMapComponent } from './components/battle-map/battle-map.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
       { path: '', component: CharacterSheetComponent }
     ]
   },
+  { path: 'map/:userId', component: BattleMapComponent },
   { path: '**', redirectTo: '' }
 ];
 

@@ -16,6 +16,10 @@
                 <mat-icon matListIcon>people</mat-icon>
                 <span matLine>Мои персонажи</span>
             </a>
+            <a mat-list-item [routerLink]="['/map', authService.user?.uid]" (click)="snav.toggle()">
+                <mat-icon matListIcon>map</mat-icon>
+                <span matLine>Моя карта</span>
+            </a>
             <a mat-list-item>
                 <mat-icon matListIcon>exit_to_app</mat-icon>
                 <span matLine (click)="snav.toggle(); logout()">Выйти</span>

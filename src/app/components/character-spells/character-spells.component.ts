@@ -50,7 +50,7 @@ export class CharacterSpellsComponent implements OnInit {
 
   viewSpell(spell: Spell) {
     const dialogRef = this.dialog.open(ViewSpellComponent, {
-      maxWidth: '100vh',
+      maxWidth: '100vw',
       data: {
         viewedSpell: spell,
         character: this.character
@@ -66,7 +66,7 @@ export class CharacterSpellsComponent implements OnInit {
 
   addSpell() {
     const dialogRef = this.dialog.open(AddSpellComponent, {
-      maxWidth: '100vh',
+      maxWidth: '100vw',
       data: {
         spells: this.spells,
         characterSpells: this.characterSpells

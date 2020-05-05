@@ -1,0 +1,29 @@
+<h1 mat-dialog-title *ngIf="unit">Редактирование юнита</h1>
+<h1 mat-dialog-title *ngIf="!unit">Создание юнита</h1>
+<form [formGroup]="form" (ngSubmit)="formSubmit()">
+  <div mat-dialog-content>
+    <div fxLayout.gt-xs="row" fxLayout.lt-sm="column" fxLayoutAlign="space-between">
+      <mat-form-field>
+        <mat-label>Имя</mat-label>
+        <input matInput required autocomplete="off" formControlName="name">
+      </mat-form-field>
+  
+      <mat-form-field>
+        <mat-label>Размер (в пикселях)</mat-label>
+        <input matInput required type="number" autocomplete="off" formControlName="size">
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row wrap" fxLayoutAlign="center">
+      <button type="button" class="color" *ngFor="let item of colors" mat-fab [style.background-color]="item"
+        (click)="selectColor(item)">
+        <mat-icon *ngIf="color.value === item">done</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button type="button" [mat-dialog-close]>Отмена</button>
+    <button mat-button type="submit" [disabled]="form.invalid">Готово</button>
+  </div>
+</form>
