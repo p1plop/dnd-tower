@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EditMapUnitComponent } from '../dialogs/edit-map-unit/edit-map-unit.component';
 import { MapUnit } from 'src/app/models/map-unit.model';
@@ -16,6 +16,7 @@ import { AvatarUploadComponent } from '../dialogs/avatar-upload/avatar-upload.co
   styleUrls: ['./battle-map.component.scss']
 })
 export class BattleMapComponent implements OnInit {
+  @ViewChild('image') image: ElementRef<HTMLImageElement>;
   map: Map = {
     units: [],
     image: ''
@@ -75,8 +76,26 @@ export class BattleMapComponent implements OnInit {
   }
 
   dropUnit(event: CdkDragEnd, index: number) {
-    this.map.units[index].xPosition += event.distance.x;
-    this.map.units[index].yPosition += event.distance.y;
+    let unitX = this.map.units[index].xPosition + event.distance.x;
+    let unitY = this.map.units[index].yPosition + event.distance.y;
+
+    if (unitX > this.image.nativeElement.width) {
+      unitX = this.image.nativeElement.width - this.map.units[index].size;
+    }
+    if (unitX < 0) {
+      unitX = 0;
+    }
+
+    if (unitY > this.image.nativeElement.height) {
+      unitY = this.image.nativeElement.height - this.map.units[index].size;
+    }
+    if (unitY < 0) {
+      unitY = 0;
+    }
+
+    this.map.units[index].xPosition = unitX;
+    this.map.units[index].yPosition = unitY;
+
     event.source.reset();
     this.mapService.updateMap(this.userId, this.map);
   }

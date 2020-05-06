@@ -12,7 +12,7 @@
            cdkDragBoundary=".map">
       </div>
       <p class="no-image" *ngIf="!map.image">Изображение отсутствует</p>
-      <img *ngIf="map.image" [src]="map.image">
+      <img #image *ngIf="map.image" [src]="map.image">
     </div>
   </div>
   
