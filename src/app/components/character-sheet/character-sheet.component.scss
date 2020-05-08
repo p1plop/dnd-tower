@@ -170,9 +170,35 @@
 }
 .hp-card {
   margin: 10px;
-  p {
+  .card-title {
     text-align: center;
-    font-size: 18px;
+    font-weight: bold;
+  }
+  .edit-btn {
+    position: absolute;
+    right: 10px;
+    top: 0px;
+  }
+  .section {
+    height: 100px;
+    .value-block {
+      text-align: center;
+      .title {
+        font-size: 12px;
+        font-weight: bold;
+      }
+      .value {
+        font-size: 32px;
+        font-weight: bold;
+      }
+    }
+    .separator {
+      width: 25px;
+      font-size: 32px;
+      font-weight: bold;
+      text-align: center;
+      padding-bottom: 15px;
+    }
   }
 }
 .money mat-form-field {

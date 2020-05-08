@@ -50,6 +50,7 @@ import { AddSpellComponent } from './components/dialogs/add-spell/add-spell.comp
 import { ConfirmationComponent } from './components/dialogs/confirmation/confirmation.component';
 import { BattleMapComponent } from './components/battle-map/battle-map.component';
 import { EditMapUnitComponent } from './components/dialogs/edit-map-unit/edit-map-unit.component';
+import { EditHpComponent } from './components/dialogs/edit-hp/edit-hp.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { EditMapUnitComponent } from './components/dialogs/edit-map-unit/edit-ma
     AddSpellComponent,
     ConfirmationComponent,
     BattleMapComponent,
-    EditMapUnitComponent
+    EditMapUnitComponent,
+    EditHpComponent
   ],
   imports: [
     BrowserModule,

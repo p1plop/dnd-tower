@@ -16,6 +16,7 @@ export interface Character {
     passivePerception: number;
     maxHp: number;
     currentHp: number;
+    temporaryHp: number;
     stats: {
         strength: number,
         dexterity: number,

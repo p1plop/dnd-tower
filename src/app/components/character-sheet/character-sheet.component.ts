@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { EditStatComponent } from '../dialogs/edit-stat/edit-stat.component';
 import { Skill } from 'src/app/models/skill.model';
@@ -9,6 +9,7 @@ import { Character } from 'src/app/models/character.model';
 import { CharactersService } from 'src/app/services/characters.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AvatarUploadComponent } from '../dialogs/avatar-upload/avatar-upload.component';
+import { EditHpComponent } from '../dialogs/edit-hp/edit-hp.component';
 
 @Component({
   selector: 'app-character-sheet',
@@ -72,6 +73,7 @@ export class CharacterSheetComponent implements OnInit {
       passivePerception: [10],
       maxHp: [1],
       currentHp: [1],
+      temporaryHp: [0],
       stats: this.fb.group({
         strength: [10],
         dexterity: [10],
@@ -175,5 +177,36 @@ export class CharacterSheetComponent implements OnInit {
     }
 
     return `+ ${bonus} = ${bonus + item.modificator}`;
+  }
+
+  editHp() {
+    const bottomSheetRef = this.bottomSheet.open(EditHpComponent, {
+      data: {
+        maxHp: this.maxHp.value,
+        currentHp: this.currentHp.value,
+        temporaryHp: this.temporaryHp.value
+      },
+      disableClose: true
+    });
+
+    bottomSheetRef.afterDismissed().subscribe(result => {
+      if (result) {
+        this.maxHp.setValue(result.maxHp);
+        this.currentHp.setValue(result.currentHp);
+        this.temporaryHp.setValue(result.temporaryHp);
+      }
+    });
+  }
+
+  get maxHp(): FormControl {
+    return this.form.get('maxHp') as FormControl;
+  }
+
+  get currentHp(): FormControl {
+    return this.form.get('currentHp') as FormControl;
+  }
+
+  get temporaryHp(): FormControl {
+    return this.form.get('temporaryHp') as FormControl;
   }
 }

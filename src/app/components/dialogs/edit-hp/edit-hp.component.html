@@ -1,0 +1,69 @@
+<form [formGroup]="form" (ngSubmit)="formSubmit()">
+  <div fxLayout="row" fxLayoutAlign="space-between">
+    <button mat-icon-button color="primary" type="button" (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <button mat-icon-button color="primary" type="submit">
+      <mat-icon>done</mat-icon>
+    </button>
+  </div>
+
+  <div fxLayout="column" fxLayoutAlign="space-between" class="section">
+    <div class="change-input-heal" fxLayout="column" fxLayoutAlign="space-around">
+      <mat-form-field>
+        <mat-label>ИСЦЕЛЕНИЕ</mat-label>
+        <input matInput type="number" autocomplete="off" [min]="0" formControlName="healing">
+      </mat-form-field>
+
+      <button mat-icon-button class="side-button heal" type="button" (click)="increaceHeal()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-around" class="result">
+      <div fxLayout="column" fxLayoutAlign="space-between" class="title">
+        <div>НОВЫЕ ОСНОВНЫЕ</div>
+        <div>{{newCurrent}}</div>
+      </div>
+  
+      <div fxLayout="column" fxLayoutAlign="space-between" class="title" *ngIf="temporaryHp.value">
+        <div>НОВЫЕ ВРЕМЕННЫЕ</div>
+        <div>{{newTemporary}}</div>
+      </div>
+    </div>
+
+    <div class="change-input-damage" fxLayout="column" fxLayoutAlign="space-around">
+      <mat-form-field>
+        <mat-label>УРОН</mat-label>
+        <input matInput type="number" autocomplete="off" [min]="0" formControlName="damage">
+      </mat-form-field>
+
+      <button mat-icon-button class="side-button damage" type="button" (click)="increaceDamage()">
+        <mat-icon>remove</mat-icon>
+      </button>
+    </div>
+  </div>
+  
+  <div fxLayout="row" fxLayoutAlign="space-between">
+    <div fxLayout="column" fxLayoutAlign="space-between" class="section">
+      <div class="title">ВСЕГО ХИТОВ</div>
+    
+      <div fxLayuot="row" fxLayoutAlign="space-around">
+        <mat-form-field>
+          <input matInput type="number" formControlName="maxHp">
+        </mat-form-field>
+      </div>
+    </div>
+  
+    <div fxLayout="column" fxLayoutAlign="space-between" class="section">
+      <div class="title">ВРЕМЕННЫЕ ХИТЫ</div>
+    
+      <div fxLayuot="row" fxLayoutAlign="space-around">
+        <mat-form-field>
+          <input matInput type="number" formControlName="temporaryHp">
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,69 @@
+$heal: #4caf50;
+$damage: #f44336;
+.section {
+  margin-bottom: 20px;
+}
+.title {
+  text-align: center;
+  font-weight: bold;
+}
+.result {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+input {
+  text-align: center;
+}
+.change-input-heal {
+  height: 100px;
+  width: 200px;
+  padding: 10px;
+  margin: auto;
+  position: relative;
+  border-radius: 15px;
+  border: 2px solid $heal;
+}
+.side-button {
+  position: absolute;
+  left: -50px;
+  top: 20px;
+}
+::ng-deep .change-input-heal .mat-focused .mat-form-field-label {
+  color: $heal !important;
+ }
+
+::ng-deep .change-input-heal .mat-focused .mat-form-field-underline {
+  background-color: $heal !important;
+} 
+
+::ng-deep .change-input-heal .mat-form-field-ripple {
+ background-color: $heal !important;
+}
+
+::ng-deep .change-input-damage .mat-focused .mat-form-field-label {
+  color: $damage !important;
+ }
+
+ ::ng-deep .change-input-damage .mat-focused .mat-form-field-underline {
+  background-color: $damage !important;
+} 
+
+::ng-deep .change-input-damage .mat-form-field-ripple {
+ background-color: $damage !important;
+}
+
+.change-input-damage {
+  height: 100px;
+  width: 200px;
+  padding: 10px;
+  margin: auto;
+  position: relative;
+  border-radius: 15px;
+  border: 2px solid $damage;
+}
+.heal {
+  color: $heal;
+}
+.damage {
+  color: $damage;
+}

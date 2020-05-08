@@ -34,6 +34,7 @@ export class CharactersService {
       passivePerception: 10,
       maxHp: 1,
       currentHp: 1,
+      temporaryHp: 0,
       stats: {
         strength: 10,
         dexterity: 10,

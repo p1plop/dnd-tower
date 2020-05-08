@@ -114,42 +114,63 @@
       </mat-expansion-panel>
     </div>
 
-    <div fxFlex.gt-xs class="main">
-      <mat-card class="combat" fxLayout="row" fxLayoutAlign="center">
-        <div class="round-param" (click)="editStat('ac')">
-          <div class="param">
-            <span class="value">{{form.value.ac}}</span>
+    <div fxFlex.gt-xs>
+      <div fxLayout.gt-xs="row" fxLayout.lt-sm="column">
+        <mat-card class="combat" fxLayout="row" fxLayoutAlign="center">
+          <div class="round-param" (click)="editStat('ac')">
+            <div class="param">
+              <span class="value">{{form.value.ac}}</span>
+            </div>
+            <span>КД</span>
           </div>
-          <span>КД</span>
-        </div>
-        <div class="round-param" (click)="editStat('iniciative')">
-          <div class="param">
-            <span class="value">{{form.value.iniciative}}</span>
+          <div class="round-param" (click)="editStat('iniciative')">
+            <div class="param">
+              <span class="value">{{form.value.iniciative}}</span>
+            </div>
+            <span>Инициатива</span>
           </div>
-          <span>Инициатива</span>
-        </div>
-        <div class="round-param" (click)="editStat('speed')">
-          <div class="param">
-            <span class="value">{{form.value.speed}}</span>
+          <div class="round-param" (click)="editStat('speed')">
+            <div class="param">
+              <span class="value">{{form.value.speed}}</span>
+            </div>
+            <span>Скорость</span>
           </div>
-          <span>Скорость</span>
-        </div>
-      </mat-card>
+        </mat-card>
+    
+        <mat-card fxFlex fxLayoutAlign="space-between" fxLayout="column" class="hp-card">
+          <div class="card-title">ХИТЫ</div>
+
+          <div fxLayout="row" fxLayoutAlign="space-around">
+            <div fxLayout="row" class="section">
+              <div fxLayout="column" fxLayoutAlign="space-around" class="value-block">
+                <div class="title">ТЕКУЩИЕ</div>
+                <div class="value">{{currentHp.value}}</div>
+              </div>
   
-      <mat-card fxLayoutAlign="space-around" fxLayout="column" class="hp-card">
-        <mat-form-field>
-          <input matInput type="number" placeholder="Очки Здоровья макс." formControlName="maxHp">
-        </mat-form-field>
+              <div class="separator" fxLayout="column" fxLayoutAlign="end">/</div>
   
-        <p>Текущее здоровье</p>
-        <p>{{form.value.currentHp}}</p>
-        <mat-slider formControlName="currentHp"
-                    color="primary"
-                    [tickInterval]="1"
-                    [max]="form.value.maxHp"
-                    thumbLabel>
-        </mat-slider>
-      </mat-card>
+              <div fxLayout="column" fxLayoutAlign="space-around" class="value-block">
+                <div class="title">ВСЕГО</div>
+                <div class="value">{{maxHp.value}}</div>
+              </div>
+            </div>
+  
+            <div fxLayout="row" class="section">
+              <div fxLayout="column" fxLayoutAlign="space-around" class="value-block">
+                <div class="title">ВРЕМЕННЫЕ</div>
+                <div class="value">{{temporaryHp.value}}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="edit-btn">
+            <button type="button" mat-icon-button color="primary" (click)="editHp()">
+              <mat-icon>create</mat-icon>
+            </button>
+          </div>
+        </mat-card>
+      </div>
+
       <mat-card class="inventory-card" fxLayout="row" fxLayoutAlign="space-between" formGroupName="inventory">
         <div>
           <div fxLayout="column" class="money">
