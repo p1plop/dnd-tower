@@ -51,6 +51,7 @@ import { ConfirmationComponent } from './components/dialogs/confirmation/confirm
 import { BattleMapComponent } from './components/battle-map/battle-map.component';
 import { EditMapUnitComponent } from './components/dialogs/edit-map-unit/edit-map-unit.component';
 import { EditHpComponent } from './components/dialogs/edit-hp/edit-hp.component';
+import { LongPressDirective } from './directives/long-press.directive';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { EditHpComponent } from './components/dialogs/edit-hp/edit-hp.component'
     ConfirmationComponent,
     BattleMapComponent,
     EditMapUnitComponent,
-    EditHpComponent
+    EditHpComponent,
+    LongPressDirective
   ],
   imports: [
     BrowserModule,

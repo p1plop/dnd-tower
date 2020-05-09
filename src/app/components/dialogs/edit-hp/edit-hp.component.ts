@@ -32,14 +32,6 @@ export class EditHpComponent implements OnInit {
       temporaryHp: this.data.temporaryHp
     });
 
-    this.healing.valueChanges.subscribe(() => {
-      this.damage.setValue(0, {emitEvent: false});
-    });
-
-    this.damage.valueChanges.subscribe(() => {
-      this.healing.setValue(0, {emitEvent: false});
-    });
-
     this.form.valueChanges.subscribe(form => {
       const modifiedDamage = form.temporaryHp && form.damage
         ? form.damage - form.temporaryHp
@@ -49,7 +41,10 @@ export class EditHpComponent implements OnInit {
         ? form.temporaryHp - form.damage
         : 0;
 
-      this.newCurrent = this.data.currentHp + form.healing - modifiedDamage;
+      this.newCurrent = this.data.currentHp + form.healing;
+      if (modifiedDamage > 0) {
+        this.newCurrent = this.newCurrent - modifiedDamage;
+      }
       if (this.newCurrent < 0) {
         this.newCurrent = 0;
       }
@@ -74,11 +69,19 @@ export class EditHpComponent implements OnInit {
   }
 
   increaceHeal() {
-    this.healing.setValue(this.healing.value + 1);
+    if (this.damage.value) {
+      this.damage.setValue(this.damage.value - 1);
+    } else {
+      this.healing.setValue(this.healing.value + 1);
+    }
   }
 
   increaceDamage() {
-    this.damage.setValue(this.damage.value + 1);
+    if (this.healing.value) {
+      this.healing.setValue(this.healing.value - 1);
+    } else {
+      this.damage.setValue(this.damage.value + 1);
+    }
   }
 
   get temporaryHp(): FormControl {
@@ -97,8 +100,24 @@ export class EditHpComponent implements OnInit {
     return this.form.get('damage') as FormControl;
   }
 
-  private calculateChanges() {
+  get currentHpStyle(): string {
+    let color = '';
+    if (this.newCurrent > this.data.currentHp) {
+      color = 'heal';
+    } else if (this.newCurrent < this.data.currentHp) {
+      color = 'damage';
+    }
+    return `title ${color}`;
+  }
 
+  get temporaryHpStyle(): string {
+    let color = '';
+    if (this.newTemporary > this.temporaryHp.value) {
+      color = 'heal';
+    } else if (this.newTemporary < this.temporaryHp.value) {
+      color = 'damage';
+    }
+    return `title ${color}`;
   }
 
 }

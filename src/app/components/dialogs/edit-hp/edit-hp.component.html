@@ -1,4 +1,23 @@
 <form [formGroup]="form" (ngSubmit)="formSubmit()">
+
+  <div class="control-buttons" fxLayout="column" fxLayoutAlign="space-between">
+    <button mat-mini-fab
+            appLongPress
+            (longPressing)="increaceHeal()"
+            type="button"
+            class="heal">
+      <mat-icon>add</mat-icon>
+    </button>
+
+    <button mat-mini-fab
+            appLongPress
+            (longPressing)="increaceDamage()"
+            type="button"
+            class="damage">
+      <mat-icon>remove</mat-icon>
+    </button>
+  </div>
+
   <div fxLayout="row" fxLayoutAlign="space-between">
     <button mat-icon-button color="primary" type="button" (click)="close()">
       <mat-icon>close</mat-icon>
@@ -10,55 +29,43 @@
   </div>
 
   <div fxLayout="column" fxLayoutAlign="space-between" class="section">
-    <div class="change-input-heal" fxLayout="column" fxLayoutAlign="space-around">
-      <mat-form-field>
-        <mat-label>ИСЦЕЛЕНИЕ</mat-label>
-        <input matInput type="number" autocomplete="off" [min]="0" formControlName="healing">
-      </mat-form-field>
-
-      <button mat-icon-button class="side-button heal" type="button" (click)="increaceHeal()">
-        <mat-icon>add</mat-icon>
-      </button>
-    </div>
-
     <div fxLayout="row" fxLayoutAlign="space-around" class="result">
-      <div fxLayout="column" fxLayoutAlign="space-between" class="title">
+      <div fxLayout="column" fxLayoutAlign="space-between" [class]="currentHpStyle">
         <div>НОВЫЕ ОСНОВНЫЕ</div>
         <div>{{newCurrent}}</div>
       </div>
-  
-      <div fxLayout="column" fxLayoutAlign="space-between" class="title" *ngIf="temporaryHp.value">
+
+      <div fxLayout="column" fxLayoutAlign="space-between" [class]="temporaryHpStyle" *ngIf="temporaryHp.value">
         <div>НОВЫЕ ВРЕМЕННЫЕ</div>
         <div>{{newTemporary}}</div>
       </div>
     </div>
 
-    <div class="change-input-damage" fxLayout="column" fxLayoutAlign="space-around">
-      <mat-form-field>
-        <mat-label>УРОН</mat-label>
-        <input matInput type="number" autocomplete="off" [min]="0" formControlName="damage">
-      </mat-form-field>
+    <div class="change-input-heal" fxLayout="column" fxLayoutAlign="space-around">
+      <div class="title heal">ИСЦЕЛЕНИЕ</div>
+      <div class="title heal">{{healing.value}}</div>
+    </div>
 
-      <button mat-icon-button class="side-button damage" type="button" (click)="increaceDamage()">
-        <mat-icon>remove</mat-icon>
-      </button>
+    <div class="change-input-damage" fxLayout="column" fxLayoutAlign="space-around">
+      <div class="title damage">УРОН</div>
+      <div class="title damage">{{damage.value}}</div>
     </div>
   </div>
-  
+
   <div fxLayout="row" fxLayoutAlign="space-between">
     <div fxLayout="column" fxLayoutAlign="space-between" class="section">
       <div class="title">ВСЕГО ХИТОВ</div>
-    
+
       <div fxLayuot="row" fxLayoutAlign="space-around">
         <mat-form-field>
           <input matInput type="number" formControlName="maxHp">
         </mat-form-field>
       </div>
     </div>
-  
+
     <div fxLayout="column" fxLayoutAlign="space-between" class="section">
       <div class="title">ВРЕМЕННЫЕ ХИТЫ</div>
-    
+
       <div fxLayuot="row" fxLayoutAlign="space-around">
         <mat-form-field>
           <input matInput type="number" formControlName="temporaryHp">
