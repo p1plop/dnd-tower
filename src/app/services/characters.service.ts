@@ -78,7 +78,8 @@ export class CharactersService {
         gold: '',
         electrum: '',
         platinum: ''
-      }
+      },
+      isDeleted: false
     };
 
     const characterPath = `users/${this.authService.user.uid}/characters`;
@@ -112,7 +113,7 @@ export class CharactersService {
       map((res: DocumentChangeAction<Character>[]) => {
         return res.map((action: DocumentChangeAction<Character>) => {
           return {id: action.payload.doc.id, ...action.payload.doc.data()};
-        });
+        }).filter(character => !character.isDeleted);
       })
     );
   }
@@ -124,7 +125,7 @@ export class CharactersService {
 
   deleteCharacter(characterId: string) {
     const path = `users/${this.authService.user.uid}/characters/${characterId}`;
-    this.afs.doc(path).delete();
+    this.afs.doc(path).update({isDeleted: true});
   }
 
   updateImage(image: File, characterId: string) {

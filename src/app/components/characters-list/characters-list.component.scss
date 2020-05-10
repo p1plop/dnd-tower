@@ -42,3 +42,6 @@ mat-spinner {
     margin: auto;
     border-radius: 10px;
 }
+::ng-deep .mat-card-header-text {
+    min-height: 60px;
+}

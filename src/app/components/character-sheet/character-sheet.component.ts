@@ -118,7 +118,8 @@ export class CharacterSheetComponent implements OnInit {
         electrum: [''],
         platinum: ['']
       }),
-      spellsIds: [[]]
+      spellsIds: [[]],
+      isDeleted: false
     });
     this.route.params.pipe(switchMap(params => {
       this.characterId = params.id;

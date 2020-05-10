@@ -62,4 +62,5 @@ export interface Character {
         platinum: string;
     };
     spellsIds?: string[];
+    isDeleted: boolean;
 }
