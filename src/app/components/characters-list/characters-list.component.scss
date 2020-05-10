@@ -22,18 +22,8 @@ mat-spinner {
 .character-card {
     display: inline-block;
     margin-bottom: 2rem;
-}
-.mat-card {
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
-    height: 70vh;
     margin-right: 10px;
     margin-left: 10px;
-}
-.mat-card-content {
-    display: flex;
-    flex: 1;
 }
 .empty-list {
     flex: auto;
@@ -44,10 +34,7 @@ mat-spinner {
     object-fit: cover; /*this makes the image in src fit to the size specified below*/
     object-position: top;
     width: 100%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
-    height: 80%;
+    height: 50vh;
     margin: auto;
     border-radius: 10px;
-}
-.main {
-    margin: 10px;
 }
