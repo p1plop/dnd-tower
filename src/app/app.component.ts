@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Platform } from '@angular/cdk/platform';
+import * as Hammer from 'hammerjs';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +10,13 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
+  @ViewChild('appWrap') appWrap: ElementRef<HTMLElement>;
+
+  constructor(
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer,
+    private platform: Platform
+  ) {
     this.matIconRegistry.addSvgIcon(
       'google',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/images/google_logo.svg')
@@ -45,5 +53,23 @@ export class AppComponent {
       'transmutation',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/images/transmutation.svg')
     );
+
+    if (this.platform.IOS) {
+      const body = document.getElementsByTagName('body')[0];
+
+      const hammertime = new Hammer(body, {
+        prevent_default: false,
+        touchAction: 'pan'
+      });
+
+      hammertime.get('pinch').set({
+        enable: true
+      });
+
+      hammertime.on('pinch pinchend pinchstart doubletap', (e) => {
+        console.log('captured event:', e.type);
+        e.preventDefault();
+      });
+    }
   }
 }

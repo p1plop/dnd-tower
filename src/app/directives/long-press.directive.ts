@@ -26,12 +26,11 @@ export class LongPressDirective {
   onMouseDown(event) {
     this.pressing = true;
     this.isLongPressing = false;
-    this.longPressing.emit(event);
     this.timeout = setTimeout(() => {
       this.isLongPressing = true;
       this.interval = setInterval(() => {
         this.longPressing.emit(event);
-      }, 50);
+      }, 100);
     }, 500);
   }
 
