@@ -122,6 +122,11 @@ export class CharactersService {
     return this.afs.doc(path).valueChanges() as Observable<Character>;
   }
 
+  deleteCharacter(characterId: string) {
+    const path = `users/${this.authService.user.uid}/characters/${characterId}`;
+    this.afs.doc(path).delete();
+  }
+
   updateImage(image: File, characterId: string) {
     const characterPath = `users/${this.authService.user.uid}/characters`;
     const imagePath = `users/${this.authService.user.uid}/characters/${characterId}`;

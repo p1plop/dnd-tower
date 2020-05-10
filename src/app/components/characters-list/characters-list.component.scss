@@ -24,6 +24,10 @@ mat-spinner {
     margin-bottom: 2rem;
     margin-right: 10px;
     margin-left: 10px;
+    .card-menu {
+        position: absolute;
+        right: 10px;
+    }
 }
 .empty-list {
     flex: auto;

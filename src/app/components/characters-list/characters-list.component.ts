@@ -3,6 +3,7 @@ import { CharactersService } from 'src/app/services/characters.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateCharacterComponent } from '../dialogs/create-character/create-character.component';
 import { Character } from 'src/app/models/character.model';
+import { ConfirmationComponent } from '../dialogs/confirmation/confirmation.component';
 
 @Component({
   selector: 'app-characters-list',
@@ -30,6 +31,23 @@ export class CharactersListComponent implements OnInit {
         }
         return 0;
       });
+    });
+  }
+
+  delete(character: Character) {
+    const dialogRef = this.dialog.open(ConfirmationComponent, {
+      data: {
+        title: 'Подтверждение удаления',
+        message: 'Вы уверены, что хотите удалить этого персонажа?',
+        cancel: 'Отмена',
+        confirm: 'Удалить'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.charactersService.deleteCharacter(character.id);
+      }
     });
   }
 

@@ -5,6 +5,16 @@
       <mat-card-header>
         <mat-card-title>{{character.name}}</mat-card-title>
         <mat-card-subtitle>{{character.classLevel}}</mat-card-subtitle>
+
+        <button mat-icon-button [matMenuTriggerFor]="menu" class="card-menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="delete(character)">
+            <mat-icon color="warn">delete</mat-icon>
+            <span>Удалить</span>
+          </button>
+        </mat-menu>
       </mat-card-header>
       <img mat-card-image
            [src]="character.imagePath ? character.imagePath : noImagePath"
