@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ViewChildren, QueryList } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EditMapUnitComponent } from '../dialogs/edit-map-unit/edit-map-unit.component';
 import { MapUnit } from 'src/app/models/map-unit.model';
@@ -9,6 +9,8 @@ import { MapService } from 'src/app/services/map.service';
 import { Map } from 'src/app/models/map.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { AvatarUploadComponent } from '../dialogs/avatar-upload/avatar-upload.component';
+import { MatTooltip } from '@angular/material/tooltip';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-battle-map',
@@ -17,6 +19,7 @@ import { AvatarUploadComponent } from '../dialogs/avatar-upload/avatar-upload.co
 })
 export class BattleMapComponent implements OnInit {
   @ViewChild('image') image: ElementRef<HTMLImageElement>;
+  @ViewChildren(MatTooltip) tooltips: QueryList<MatTooltip>;
   map: Map = {
     units: [],
     image: ''
@@ -37,6 +40,12 @@ export class BattleMapComponent implements OnInit {
     })).subscribe(map => {
       if (map) {
         this.map = map;
+
+        setTimeout(() => {
+          for (const tooltip of this.tooltips.toArray()) {
+            tooltip.toggle();
+          }
+        }, 500);
       }
     });
   }

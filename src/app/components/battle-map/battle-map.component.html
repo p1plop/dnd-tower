@@ -17,7 +17,7 @@
     </div>
   </div>
   
-  <div class="units-list" fxFlex.gt-xs="30%" *ngIf="map.image && isOwner">
+  <div class="units-list" fxFlex.gt-xs="30%" *ngIf="map.image">
     <h3 class="center">Список юнитов</h3>
     <mat-list role="list">
       <mat-list-item *ngFor="let unit of map.units; let i=index" role="listitem">
@@ -35,7 +35,7 @@
   </div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="center" class="upload" *ngIf="isOwner" (click)="uploadImage()">
+<div fxLayout="row" fxLayoutAlign="center" class="upload" (click)="uploadImage()">
   <button mat-raised-button color="primary">
     {{map.image ? 'Изменить' : 'Загрузить'}} изображение
   </button>
