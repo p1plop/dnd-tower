@@ -1,5 +1,5 @@
-<h1 mat-dialog-title *ngIf="unit">Редактирование юнита</h1>
-<h1 mat-dialog-title *ngIf="!unit">Создание юнита</h1>
+<h1 mat-dialog-title *ngIf="data.unit">Редактирование юнита</h1>
+<h1 mat-dialog-title *ngIf="!data.unit">Создание юнита</h1>
 <form [formGroup]="form" (ngSubmit)="formSubmit()">
   <div mat-dialog-content>
     <div fxLayout.gt-xs="row" fxLayout.lt-sm="column" fxLayoutAlign="space-between">
@@ -12,6 +12,34 @@
         <mat-label>Размер (в пикселях)</mat-label>
         <input matInput required type="number" autocomplete="off" formControlName="size">
       </mat-form-field>
+    </div>
+
+    <div fxLayout="column" class="initiative">
+      <div class="bold">ИНИЦИАТИВА</div>
+
+      <div fxLayout="row" fxLayoutAlign="space-around">
+        <button mat-mini-fab
+                appLongPress
+                (longPressing)="decreaceInitiative()"
+                (click)="decreaceInitiative()"
+                type="button"
+                color="primary">
+          <mat-icon>remove</mat-icon>
+        </button>
+
+        <mat-form-field>
+          <input matInput type="number" autocomplete="off" formControlName="initiative">
+        </mat-form-field>
+
+        <button mat-mini-fab
+                appLongPress
+                (longPressing)="increaceInitiative()"
+                (click)="increaceInitiative()"
+                type="button"
+                color="primary">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
     </div>
 
     <div fxLayout="row wrap" fxLayoutAlign="center">

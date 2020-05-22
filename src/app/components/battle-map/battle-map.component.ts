@@ -9,8 +9,9 @@ import { MapService } from 'src/app/services/map.service';
 import { Map } from 'src/app/models/map.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { AvatarUploadComponent } from '../dialogs/avatar-upload/avatar-upload.component';
-import { MatTooltip } from '@angular/material/tooltip';
-import { Observable } from 'rxjs';
+import { until } from 'protractor';
+import { unsupported } from '@angular/compiler/src/render3/view/util';
+
 
 @Component({
   selector: 'app-battle-map',
@@ -19,7 +20,6 @@ import { Observable } from 'rxjs';
 })
 export class BattleMapComponent implements OnInit {
   @ViewChild('image') image: ElementRef<HTMLImageElement>;
-  @ViewChildren(MatTooltip) tooltips: QueryList<MatTooltip>;
   map: Map = {
     units: [],
     image: ''
@@ -40,12 +40,9 @@ export class BattleMapComponent implements OnInit {
     })).subscribe(map => {
       if (map) {
         this.map = map;
-
-        setTimeout(() => {
-          for (const tooltip of this.tooltips.toArray()) {
-            tooltip.toggle();
-          }
-        }, 500);
+        this.map.units = this.map.units.sort((a, b) => {
+          return b.initiative - a.initiative;
+        });
       }
     });
   }
@@ -54,10 +51,10 @@ export class BattleMapComponent implements OnInit {
     const dialogRef = this.dialog.open(EditMapUnitComponent, {
       width: '600px',
       maxWidth: '100vw',
-      data: this.map.units[index]
+      data: {unit: this.map.units[index]}
     });
 
-    dialogRef.afterClosed().subscribe(unit => {
+    dialogRef.afterClosed().subscribe((unit: MapUnit) => {
       if (unit) {
         this.map.units[index] = unit;
         this.mapService.updateMap(this.userId, this.map);
@@ -68,7 +65,11 @@ export class BattleMapComponent implements OnInit {
   addUnit() {
     const dialogRef = this.dialog.open(EditMapUnitComponent, {
       width: '600px',
-      maxWidth: '100vw'
+      maxWidth: '100vw',
+      data: {
+        imageWidth: this.image.nativeElement.width,
+        imageHeight: this.image.nativeElement.height
+      }
     });
 
     dialogRef.afterClosed().subscribe((unit: MapUnit) => {
@@ -129,6 +130,25 @@ export class BattleMapComponent implements OnInit {
       left: `${unit.xPosition}px`,
       'background-color': unit.color,
       'border-radius': `${unit.size}px`
+    };
+  }
+
+  getUnitLabelStyle(unit: MapUnit) {
+    const labelWidth = unit.name.length * 9;
+    return {
+      position: 'absolute',
+      top: '-35px',
+      width: `${labelWidth}px`,
+      color: '#fff',
+      right: `-${(labelWidth - unit.size) / 2}px`,
+      padding: '5px',
+      'border-radius': '10px',
+      'background-color': 'rgba(0, 0, 0, 0.5)',
+      'text-lign': 'center',
+      'font-size': '14px',
+      'text-align': 'center',
+      'text-transform': 'uppercase',
+      'z-index': '1000'
     };
   }
 

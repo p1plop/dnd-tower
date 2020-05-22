@@ -5,6 +5,8 @@ export interface MapUnit {
 
   color: string;
 
+  initiative: number;
+
   xPosition: number;
 
   yPosition: number;

@@ -17,7 +17,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
@@ -102,7 +101,6 @@ import { LongPressDirective } from './directives/long-press.directive';
     MatSliderModule,
     MatTableModule,
     MatPaginatorModule,
-    MatTooltipModule,
     MatMenuModule,
     DragDropModule,
     HttpClientModule,

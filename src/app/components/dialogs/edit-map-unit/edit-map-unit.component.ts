@@ -3,6 +3,14 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MapUnit } from 'src/app/models/map-unit.model';
 
+interface DialogData {
+  unit: MapUnit;
+
+  imageWidth?: number;
+
+  imageHeight?: number;
+}
+
 @Component({
   selector: 'app-edit-map-unit',
   templateUrl: './edit-map-unit.component.html',
@@ -35,7 +43,7 @@ export class EditMapUnitComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<EditMapUnitComponent>,
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public unit: MapUnit
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) { }
 
   ngOnInit(): void {
@@ -43,12 +51,16 @@ export class EditMapUnitComponent implements OnInit {
       name: ['', Validators.required],
       size: [24, [Validators.required, Validators.min(1)]],
       color: ['#f44336', Validators.required],
+      initiative: 0,
       xPosition: 0,
       yPosition: 0
     });
 
-    if (this.unit) {
-      this.form.patchValue(this.unit);
+    if (this.data.unit) {
+      this.form.patchValue(this.data.unit);
+    } else if (this.data.imageWidth && this.data.imageHeight) {
+      this.form.get('xPosition').setValue(this.data.imageWidth / 2);
+      this.form.get('yPosition').setValue(this.data.imageHeight / 2);
     }
   }
 
@@ -57,11 +69,27 @@ export class EditMapUnitComponent implements OnInit {
   }
 
   formSubmit() {
+    const value = this.form.value;
+    if (!value.initiative || !Number.isInteger(value.initiative)) {
+      value.initiative = 0;
+    }
     this.dialogRef.close(this.form.value);
+  }
+
+  decreaceInitiative() {
+    this.initiative.setValue(this.initiative.value - 1);
+  }
+
+  increaceInitiative() {
+    this.initiative.setValue(this.initiative.value + 1);
   }
 
   get color(): FormControl {
     return this.form.get('color') as FormControl;
+  }
+
+  get initiative(): FormControl {
+    return this.form.get('initiative') as FormControl;
   }
 
 }
