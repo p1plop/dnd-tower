@@ -58,8 +58,7 @@
       <mat-card>
         <mat-card-content>
           <div class="parameter-with-title" fxLayout="row" fxLayoutAlign="start center">
-            <span (click)="editStat('proficiencyBonus')"
-              class="value">+{{getStat('proficiencyBonus')}}</span>
+            <span (click)="editStat('proficiencyBonus')" class="value">+{{getStat('proficiencyBonus')}}</span>
             <span class="name">Бонус мастерства</span>
           </div>
         </mat-card-content>
@@ -68,8 +67,7 @@
       <mat-card>
         <mat-card-content>
           <div class="parameter-with-title" fxLayout="row" fxLayoutAlign="start center">
-            <span (click)="editStat('passivePerception')"
-              class="value">{{getStat('passivePerception')}}</span>
+            <span (click)="editStat('passivePerception')" class="value">{{getStat('passivePerception')}}</span>
             <span class="name">Внимательность (пасс.)</span>
           </div>
         </mat-card-content>
@@ -116,7 +114,7 @@
 
     <div fxFlex.gt-xs>
       <div fxLayout.gt-xs="row" fxLayout.lt-sm="column">
-        <mat-card class="combat" fxLayout="row" fxLayoutAlign="center">
+        <mat-card class="spacing" fxLayout="row" fxLayoutAlign="center">
           <div class="round-param" (click)="editStat('ac')">
             <div class="param">
               <span class="value">{{form.value.ac}}</span>
@@ -136,7 +134,7 @@
             <span>Скорость</span>
           </div>
         </mat-card>
-    
+
         <mat-card fxFlex fxLayoutAlign="space-between" fxLayout="column" class="hp-card">
           <div class="card-title">ХИТЫ</div>
 
@@ -146,15 +144,15 @@
                 <div class="title">ТЕКУЩИЕ</div>
                 <div class="value">{{currentHp.value}}</div>
               </div>
-  
+
               <div class="separator" fxLayout="column" fxLayoutAlign="end">/</div>
-  
+
               <div fxLayout="column" fxLayoutAlign="space-around" class="value-block">
                 <div class="title">ВСЕГО</div>
                 <div class="value">{{maxHp.value}}</div>
               </div>
             </div>
-  
+
             <div fxLayout="row" class="section">
               <div fxLayout="column" fxLayoutAlign="space-around" class="value-block">
                 <div class="title">ВРЕМЕННЫЕ</div>
@@ -171,30 +169,83 @@
         </mat-card>
       </div>
 
-      <mat-card class="inventory-card" fxLayout="row" fxLayoutAlign="space-between" formGroupName="inventory">
-        <div>
-          <div fxLayout="column" class="money">
-            <mat-form-field>
-              <input matInput placeholder="Медь" formControlName="copper">
-            </mat-form-field>
-            <mat-form-field>
-              <input matInput placeholder="Серебро" formControlName="silver">
-            </mat-form-field>
-            <mat-form-field>
-              <input matInput placeholder="Золото" formControlName="gold">
-            </mat-form-field>
-            <mat-form-field>
-              <input matInput placeholder="Электрум" formControlName="electrum">
-            </mat-form-field>
-            <mat-form-field>
-              <input matInput placeholder="Платина" formControlName="platinum">
-            </mat-form-field>
-          </div>
-        </div>
-        <mat-form-field class="inventory">
-          <textarea formControlName="items" matInput placeholder="Снаряжение" matTextareaAutosize
-            matAutosizeMinRows=16 matAutosizeMaxRows=16></textarea>
-        </mat-form-field>
+      <mat-card class="spacing">
+        <mat-tab-group mat-align-tabs="center">
+          <mat-tab label="Инвентарь">
+            <div fxLayout="row" fxLayoutAlign="space-around" formGroupName="inventory" class="tab-item">
+              <div fxLayout="column" class="money">
+                <mat-form-field>
+                  <input matInput placeholder="Медь" formControlName="copper">
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput placeholder="Серебро" formControlName="silver">
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput placeholder="Золото" formControlName="gold">
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput placeholder="Электрум" formControlName="electrum">
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput placeholder="Платина" formControlName="platinum">
+                </mat-form-field>
+              </div>
+              <mat-form-field class="inventory">
+                <textarea formControlName="items" matInput placeholder="Снаряжение" matTextareaAutosize
+                  matAutosizeMinRows="16" matAutosizeMaxRows="16"></textarea>
+              </mat-form-field>
+            </div>
+          </mat-tab>
+          <mat-tab label="Заметки">
+            <div fxLayout.lt-sm="column" fxLayout.gt-xs="row" fxLayoutAlign="space-around" class="tab-item" formArrayName="notes">
+              <div fxLayout="column" class="notes" fxFlex.gt-xs="300px" fxFlex.lt-sm="100%">
+                <div>
+                  <div fxLayout="row" fxLayoutAlign="space-around">
+                    <button mat-flat-button type="button" color="primary" (click)="addNoteGroup()">
+                      <mat-icon>add</mat-icon>
+                      Создать
+                    </button>
+                  </div>
+                  <mat-selection-list #notesList [multiple]="false" (selectionChange)="noteChange($event)">
+                    <mat-list-option *ngFor="let note of notes.controls; let i=index"
+                                     fxLayout="row"
+                                     fxLayoutAlign="space-between"
+                                     [value]="i">
+                      <div>{{note.value.title}}</div>
+                    </mat-list-option>
+                  </mat-selection-list>
+                </div>
+              </div>
+              <div fxLayout="column"
+                   fxLayoutAlign="center"
+                   [formGroup]="notes.controls[selectedNote]"
+                   fxFlex.gt-xs="100%"
+                   class="note-edit"
+                   *ngIf="selectedNote || selectedNote === 0">
+                <div fxLayout="row" fxLayoutAlign="space-between">
+                  <mat-form-field>
+                    <input matInput formControlName="title" autocomplete="off" placeholder="Название заметки">
+                  </mat-form-field>
+
+                  <button mat-icon-button color="primary" type="button" (click)="removeNote(selectedNote)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+
+
+                <mat-form-field>
+                  <textarea matInput matTextareaAutosize formControlName="text" placeholder="Текст заметки"
+                    matAutosizeMinRows="16" matAutosizeMaxRows="16">
+                  </textarea>
+                </mat-form-field>
+              </div>
+
+              <div class="note center" fxFlex.gt-xs="100%" *ngIf="!selectedNote && selectedNote !== 0">
+                Выберите или создайте заметку
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
       </mat-card>
 
       <div class="spells" fxLayoutAlign="space-around">
@@ -210,6 +261,6 @@
     <mat-icon>save</mat-icon>
   </button>
 
-  
+
 </form>
 <mat-spinner class="spinner" *ngIf="loading"></mat-spinner>

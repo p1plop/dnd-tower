@@ -45,6 +45,7 @@
   position: fixed;
   bottom: 2rem;
   right: 2rem;
+  z-index: 1000;
   color: #fff;
 }
 .spells {
@@ -202,12 +203,30 @@
     }
   }
 }
-.money mat-form-field {
-  width: 80px;
+.money {
+  margin-right: 15px;
+  mat-form-field {
+    width: 80px;
+  }
 }
 .inventory {
-  width: 70%;
+  width: 80%;
 }
-.inventory-card, .combat {
+.note {
+  min-height: 300px;
+}
+.spacing {
   margin: 10px;
+}
+.note-edit {
+  padding: 10px;
+}
+.tab-item {
+  margin-top: 20px;
+}
+.center {
+  text-align: center;
+}
+::ng-deep .mat-list-item-content {
+  width: 100%;
 }

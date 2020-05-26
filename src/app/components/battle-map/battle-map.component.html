@@ -34,8 +34,8 @@
   </div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="center" class="upload" (click)="uploadImage()">
-  <button mat-raised-button color="primary">
+<div fxLayout="row" fxLayoutAlign="center" class="upload">
+  <button mat-raised-button color="primary" (click)="uploadImage()">
     {{map.image ? 'Изменить' : 'Загрузить'}} изображение
   </button>
 </div>

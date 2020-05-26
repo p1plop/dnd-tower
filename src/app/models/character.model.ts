@@ -1,4 +1,5 @@
 import { Skill } from './skill.model';
+import { Note } from './note.model';
 
 export interface Character {
     id?: string;
@@ -61,6 +62,7 @@ export interface Character {
         electrum: string;
         platinum: string;
     };
+    notes: Note[];
     spellsIds?: string[];
     isDeleted: boolean;
 }

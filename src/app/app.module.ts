@@ -18,6 +18,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTabsModule } from '@angular/material/tabs';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { AngularFireModule } from '@angular/fire';
@@ -102,6 +103,7 @@ import { LongPressDirective } from './directives/long-press.directive';
     MatTableModule,
     MatPaginatorModule,
     MatMenuModule,
+    MatTabsModule,
     DragDropModule,
     HttpClientModule,
     BrowserAnimationsModule,

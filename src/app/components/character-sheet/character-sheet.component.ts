@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { EditStatComponent } from '../dialogs/edit-stat/edit-stat.component';
 import { Skill } from 'src/app/models/skill.model';
@@ -10,6 +10,8 @@ import { CharactersService } from 'src/app/services/characters.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AvatarUploadComponent } from '../dialogs/avatar-upload/avatar-upload.component';
 import { EditHpComponent } from '../dialogs/edit-hp/edit-hp.component';
+import { Note } from 'src/app/models/note.model';
+import { MatSelectionListChange } from '@angular/material/list';
 
 @Component({
   selector: 'app-character-sheet',
@@ -20,6 +22,7 @@ export class CharacterSheetComponent implements OnInit {
   characterId: string;
   form: FormGroup;
   loading = true;
+  selectedNote: number;
   statsNames = [
     { key: 'strength', value: 'Сила'},
     { key: 'dexterity', value: 'Ловкость'},
@@ -118,6 +121,7 @@ export class CharacterSheetComponent implements OnInit {
         electrum: [''],
         platinum: ['']
       }),
+      notes: this.fb.array([]),
       spellsIds: [[]],
       isDeleted: false
     });
@@ -126,12 +130,27 @@ export class CharacterSheetComponent implements OnInit {
       return this.charactersService.getCharacter(this.characterId);
     })).subscribe((character: Character) => {
       this.form.patchValue(character);
+      if (character.notes) {
+        this.notes.clear();
+        for (const note of character.notes) {
+          this.addNoteGroup(note);
+        }
+      }
       this.loading = false;
     });
   }
 
   formSubmit() {
     this.charactersService.editCharacter(this.characterId, this.form.value);
+  }
+
+  noteChange(event: MatSelectionListChange) {
+    this.selectedNote = event.option.value;
+  }
+
+  removeNote(index: number) {
+    this.notes.removeAt(index);
+    this.selectedNote = null;
   }
 
   editAvatar() {
@@ -197,6 +216,17 @@ export class CharacterSheetComponent implements OnInit {
         this.temporaryHp.setValue(result.temporaryHp);
       }
     });
+  }
+
+  addNoteGroup(note?: Note) {
+    this.notes.push(this.fb.group({
+      title: [note ? note.title : 'Заметка', Validators.required],
+      text: [note ? note.text : '']
+    }));
+  }
+
+  get notes(): FormArray {
+    return this.form.get('notes') as FormArray;
   }
 
   get maxHp(): FormControl {

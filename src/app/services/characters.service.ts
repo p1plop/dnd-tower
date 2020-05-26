@@ -79,6 +79,7 @@ export class CharactersService {
         electrum: '',
         platinum: ''
       },
+      notes: [],
       isDeleted: false
     };
 
