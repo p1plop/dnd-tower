@@ -9,8 +9,6 @@ import { MapService } from 'src/app/services/map.service';
 import { Map } from 'src/app/models/map.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { AvatarUploadComponent } from '../dialogs/avatar-upload/avatar-upload.component';
-import { until } from 'protractor';
-import { unsupported } from '@angular/compiler/src/render3/view/util';
 
 
 @Component({

@@ -54,22 +54,20 @@ export class AppComponent {
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/images/transmutation.svg')
     );
 
-    if (this.platform.IOS) {
-      const body = document.getElementsByTagName('body')[0];
+    const body = document.getElementsByTagName('body')[0];
 
-      const hammertime = new Hammer(body, {
-        prevent_default: false,
-        touchAction: 'pan'
-      });
+    const hammertime = new Hammer(body, {
+      prevent_default: false,
+      touchAction: 'pan'
+    });
 
-      hammertime.get('pinch').set({
-        enable: true
-      });
+    hammertime.get('pinch').set({
+      enable: true
+    });
 
-      hammertime.on('pinch pinchend pinchstart doubletap', (e) => {
-        console.log('captured event:', e.type);
-        e.preventDefault();
-      });
-    }
+    hammertime.on('doubletap', (e) => {
+      console.log('prevent event');
+      e.preventDefault();
+    });
   }
 }
