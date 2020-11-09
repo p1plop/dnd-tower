@@ -170,7 +170,7 @@ export class CharacterSheetComponent implements OnInit {
     });
 
     bottomSheetRef.afterDismissed().subscribe(result => {
-      if (result) {
+      if (result !== undefined) {
         sectionGroup.get(fieldName).setValue(result);
       }
     });

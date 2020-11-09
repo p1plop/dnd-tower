@@ -1,5 +1,9 @@
 @import "../../my-theme.scss";
 
+form {
+  max-width: 1400px;
+  margin: auto;
+}
 .avatar {
   margin: 10px;
   mat-icon {
@@ -87,7 +91,7 @@
     margin: auto;
     margin-top: 5px;
     margin-bottom: 5px;
-  
+
     .modificator {
       width: 50%;
       height: 35px;
@@ -97,7 +101,7 @@
       margin: auto;
       margin-top: 5px;
     }
-  
+
     .value {
       font-size: 18px;
       color: $primary;
