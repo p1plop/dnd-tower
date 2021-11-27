@@ -67,6 +67,7 @@ export class CharacterSpellsComponent implements OnInit {
   addSpell() {
     const dialogRef = this.dialog.open(AddSpellComponent, {
       maxWidth: '100vw',
+      minWidth: '50vw',
       data: {
         spells: this.spells,
         characterSpells: this.characterSpells

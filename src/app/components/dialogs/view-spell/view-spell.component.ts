@@ -7,7 +7,7 @@ import { first } from 'rxjs/operators';
 
 interface DialogData {
   viewedSpell: Spell;
-  character: Character;
+  character?: Character;
 }
 
 @Component({

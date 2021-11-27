@@ -52,6 +52,7 @@ import { BattleMapComponent } from './components/battle-map/battle-map.component
 import { EditMapUnitComponent } from './components/dialogs/edit-map-unit/edit-map-unit.component';
 import { EditHpComponent } from './components/dialogs/edit-hp/edit-hp.component';
 import { LongPressDirective } from './directives/long-press.directive';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -104,6 +105,7 @@ import { LongPressDirective } from './directives/long-press.directive';
     MatPaginatorModule,
     MatMenuModule,
     MatTabsModule,
+    MatSelectModule,
     DragDropModule,
     HttpClientModule,
     BrowserAnimationsModule,

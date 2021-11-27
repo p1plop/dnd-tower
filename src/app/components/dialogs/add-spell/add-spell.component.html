@@ -1,10 +1,22 @@
 <h1 mat-dialog-title>Добавление заклинаний</h1>
 
 <div mat-dialog-content>
-  <mat-form-field class="filter-string">
-    <mat-label>Фильтрация по имени</mat-label>
-    <input matInput autocomplete="off" (keyup)="applyFilter($event)">
-  </mat-form-field>
+  <div [formGroup]="filterForm">
+    <div fxLayout.gt-xs="row" fxLayout.lt-sm="column" fxLayoutAlign="space-between">
+      <mat-form-field fxFlex.gt-xs="40%">
+        <mat-label>Фильтрация по имени</mat-label>
+        <input matInput autocomplete="off" formControlName="searchString">
+      </mat-form-field>
+
+      <mat-form-field fxFlex.gt-xs="40%">
+        <mat-label>Источник</mat-label>
+        <mat-select formControlName="source">
+          <mat-option value="all">Все источники</mat-option>
+          <mat-option *ngFor="let source of sources" [value]="source">{{source}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
 
   <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="select">
@@ -26,7 +38,34 @@
 
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Название </th>
-      <td mat-cell *matCellDef="let spell"> {{spell.nameRu}} </td>
+      <td mat-cell *matCellDef="let spell">
+        {{spell.nameRu}}
+        <div class="level">{{spell.level === 0 ? 'Заговор' : spell.level + ' Уровень'}}</div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="school">
+      <th mat-header-cell *matHeaderCellDef> Школа </th>
+      <td mat-cell *matCellDef="let spell"> {{spell.school}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="classes">
+      <th mat-header-cell *matHeaderCellDef> Классы </th>
+      <td mat-cell *matCellDef="let spell"> {{spell.classes.join(', ')}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="source">
+      <th mat-header-cell *matHeaderCellDef> Источник </th>
+      <td mat-cell *matCellDef="let spell"> {{spell.source}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let spell">
+        <button color="primary" mat-icon-button (click)="$event.stopImmediatePropagation(); viewSpell(spell)">
+          <mat-icon>remove_red_eye</mat-icon>
+        </button>
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
