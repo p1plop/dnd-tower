@@ -6,10 +6,12 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import {ViewSpellComponent} from '../view-spell/view-spell.component';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {fromEvent, Observable} from 'rxjs';
+import {fromEvent} from 'rxjs';
 import {map, startWith, takeUntil, throttleTime} from 'rxjs/operators';
-import {AbstractDestroySubject} from "../../../helpers/abstract-destroy-subject";
-import {IFilterModel} from "./models/filter-model.interface";
+import {AbstractDestroySubject} from '../../../helpers/abstract-destroy-subject';
+import {IFilterModel} from './models/filter-model.interface';
+import {ILevelItem} from './models/level-item.interface';
+import {levelsList} from './levels-list';
 
 interface DialogData {
   spells: Spell[];
@@ -27,10 +29,14 @@ const minimumColumnsSet: string[] = ['select', 'name', 'actions'];
 export class AddSpellComponent extends AbstractDestroySubject implements OnInit {
   spells: Spell[];
   sources: string[];
+  classes: string[];
+  schools: string[];
+  levels: ILevelItem[] = levelsList;
   selection = new SelectionModel<Spell>(true, []);
   displayedColumns: string[] = fullColumnsSet;
   dataSource: MatTableDataSource<Spell>;
   filterForm: FormGroup;
+
 
   constructor(
     public dialogRef: MatDialogRef<AddSpellComponent>,
@@ -67,9 +73,21 @@ export class AddSpellComponent extends AbstractDestroySubject implements OnInit 
       .map((spell: Spell) => spell.source)
       .filter((value: string, index: number, self: string[]) => self.indexOf(value) === index);
 
+    this.classes = this.spells
+      .map((spell: Spell) => spell.classes)
+      .reduce((accumulator: string[], value: string[]) => accumulator.concat(value), [])
+      .filter((value: string, index: number, self: string[]) => self.indexOf(value) === index);
+
+    this.schools = this.spells
+      .map((spell: Spell) => spell.school)
+      .filter((value: string, index: number, self: string[]) => self.indexOf(value) === index);
+
     this.filterForm = this.fb.group({
       searchString: [''],
-      source: ['all']
+      source: ['all'],
+      levels: [[]],
+      classes: [[]],
+      schools: [[]],
     });
 
     this.filterForm.valueChanges.pipe(
@@ -84,6 +102,16 @@ export class AddSpellComponent extends AbstractDestroySubject implements OnInit 
     this.dataSource.filterPredicate = (spell: Spell, filter: string) => {
       const filterValue: IFilterModel = JSON.parse(filter);
       if (filterValue.source !== 'all' && spell.source !== filterValue.source) {
+        return false;
+      }
+      if (filterValue.levels && filterValue.levels.length && !filterValue.levels.includes(spell.level)) {
+        return false;
+      }
+      if (filterValue.schools && filterValue.schools.length && !filterValue.schools.includes(spell.school)) {
+        return false;
+      }
+      const classesIntersection: boolean = !!spell.classes.filter((value: string) => filterValue.classes.includes(value)).length;
+      if (filterValue.classes && filterValue.classes.length && !classesIntersection) {
         return false;
       }
       return spell.nameRu.trim().toLowerCase().includes(filterValue.searchString) ||

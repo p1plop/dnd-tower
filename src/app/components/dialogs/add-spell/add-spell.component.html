@@ -2,10 +2,18 @@
 
 <div mat-dialog-content>
   <div [formGroup]="filterForm">
-    <div fxLayout.gt-xs="row" fxLayout.lt-sm="column" fxLayoutAlign="space-between">
-      <mat-form-field fxFlex.gt-xs="40%">
+    <div>
+      <mat-form-field fxFlex.gt-xs="100%">
         <mat-label>Фильтрация по имени</mat-label>
         <input matInput autocomplete="off" formControlName="searchString">
+      </mat-form-field>
+    </div>
+    <div fxLayout.gt-xs="row" fxLayout.lt-sm="column" fxLayoutAlign="space-between">
+      <mat-form-field fxFlex.gt-xs="40%">
+        <mat-label>Школа</mat-label>
+        <mat-select formControlName="schools" multiple>
+          <mat-option *ngFor="let school of schools" [value]="school">{{school}}</mat-option>
+        </mat-select>
       </mat-form-field>
 
       <mat-form-field fxFlex.gt-xs="40%">
@@ -13,6 +21,22 @@
         <mat-select formControlName="source">
           <mat-option value="all">Все источники</mat-option>
           <mat-option *ngFor="let source of sources" [value]="source">{{source}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout.gt-xs="row" fxLayout.lt-sm="column" fxLayoutAlign="space-between">
+      <mat-form-field fxFlex.gt-xs="40%">
+        <mat-label>Уровень</mat-label>
+        <mat-select formControlName="levels" multiple>
+          <mat-option *ngFor="let level of levels" [value]="level.value">{{level.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field fxFlex.gt-xs="40%">
+        <mat-label>Класс</mat-label>
+        <mat-select formControlName="classes" multiple>
+          <mat-option *ngFor="let class of classes" [value]="class">{{class}}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
