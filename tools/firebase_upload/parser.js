@@ -1,5 +1,4 @@
 // SOURCE захардкожен, вноси сам
-// Нужно удалить ссылки и переносы строк, еще не сделал
 
 const cards = $('.card-wrapper');
 const result = [];
@@ -14,7 +13,7 @@ for (card of cards) {
     const duration = $(card).find('li:contains("Длительность:")').text().split('Длительность:')[1].trim();
     const classes = $(card).find('li:contains("Классы:")').text().split('Классы:')[1].trim();
     $(card).find('[itemprop="description"] .additionalInfo').remove();
-    $('.desc a').unwrap().contents().unwrap();
+    $('.desc a').contents().unwrap();
     const description = $(card).find('[itemprop="description"]').html();
 
     const spell = {
@@ -28,7 +27,7 @@ for (card of cards) {
         components,
         duration,
         classes: classes.split(', ').map(item => item.charAt(0).toUpperCase() + item.slice(1)),
-        source: 'Player\'s handbook',
+        source: 'Explorer’s Guide to Wildemount',
         description: description.replace(/\n|\r/g, "")
 
     };
