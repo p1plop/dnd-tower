@@ -10,6 +10,7 @@ const EGW = require('./src/EGW.json');
 const FTD = require('./src/FTD.json');
 const IDRF = require('./src/IDRF.json');
 const LLK = require('./src/LLK.json');
+const SAS = require('./src/SAS.json');
 
 // Закоментированны уже загруженные списки заклинаний, если нужно внести новый или исправить существующий,
 // то раскомментируй/добавь запись в этом массиве
@@ -22,6 +23,7 @@ const documents = [
     // { key: 'FTD', data: FTD },
     // { key: 'IDRF', data: IDRF },
     // { key: 'LLK', data: LLK },
+    // { key: 'SAS', data: SAS },
 ];
 
 admin.initializeApp({
