@@ -119,34 +119,17 @@ export class BattleMapComponent implements OnInit {
 
   getUnitStyle(unit: MapUnit) {
     return {
-      position: 'absolute',
-      cursor: 'move',
-      display: 'inline-block',
-      width: `${unit.size}px`,
-      height: `${unit.size}px`,
       top: `${unit.yPosition}px`,
       left: `${unit.xPosition}px`,
-      'background-color': unit.color,
-      'border-radius': `${unit.size}px`
     };
   }
 
-  getUnitLabelStyle(unit: MapUnit) {
-    const labelWidth = unit.name.length * 9;
+  getTokenStyle(unit: MapUnit) {
     return {
-      position: 'absolute',
-      top: '-35px',
-      width: `${labelWidth}px`,
-      color: '#fff',
-      right: `-${(labelWidth - unit.size) / 2}px`,
-      padding: '5px',
-      'border-radius': '10px',
-      'background-color': 'rgba(0, 0, 0, 0.5)',
-      'text-lign': 'center',
-      'font-size': '14px',
-      'text-align': 'center',
-      'text-transform': 'uppercase',
-      'z-index': '1000'
+      width: `${unit.size}px`,
+      height: `${unit.size}px`,
+      'background-color': unit.color,
+      'border-radius': `${unit.size}px`
     };
   }
 

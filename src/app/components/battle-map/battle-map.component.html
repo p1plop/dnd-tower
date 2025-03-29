@@ -3,18 +3,16 @@
 <div fxLayout.gt-xs="row" fxLayout.lt-sm="column" fxLayoutAlign="space-around">
   <div class="map-wraper">
     <div class="map">
-      <div *ngFor="let unit of map.units; let i=index"
-           [ngStyle]="getUnitStyle(unit)"
-           cdkDrag
-           (cdkDragEnded)="dropUnit($event, i)"
-           cdkDragBoundary=".map">
-        <div [ngStyle]="getUnitLabelStyle(unit)"><span>{{unit.name}}</span></div>
+      <div *ngFor="let unit of map.units; let i=index" class="unit" cdkDrag
+        (cdkDragEnded)="dropUnit($event, i)" cdkDragBoundary=".map" [ngStyle]="getUnitStyle(unit)">
+        <div class="unit-label">{{unit.name}}</div>
+        <div class="unit-token" [ngStyle]="getTokenStyle(unit)"></div>
       </div>
       <p class="no-image" *ngIf="!map.image">Изображение отсутствует</p>
       <img #image *ngIf="map.image" [src]="map.image">
     </div>
   </div>
-  
+
   <div class="units-list" fxFlex.gt-xs="30%" *ngIf="map.image">
     <h3 class="center">Список юнитов</h3>
     <mat-list role="list">
@@ -40,10 +38,6 @@
   </button>
 </div>
 
-<button color="primary"
-        mat-fab
-        class="add-btn"
-        (click)="addUnit()"
-        [disabled]="!map.image">
+<button color="primary" mat-fab class="add-btn" (click)="addUnit()" [disabled]="!map.image">
   <mat-icon>add</mat-icon>
 </button>
