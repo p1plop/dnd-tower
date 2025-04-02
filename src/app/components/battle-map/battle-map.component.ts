@@ -49,7 +49,10 @@ export class BattleMapComponent implements OnInit {
     const dialogRef = this.dialog.open(EditMapUnitComponent, {
       width: '600px',
       maxWidth: '100vw',
-      data: {unit: this.map.units[index]}
+      data: {
+        unit: this.map.units[index],
+        userId: this.userId
+      }
     });
 
     dialogRef.afterClosed().subscribe((unit: MapUnit) => {
@@ -66,7 +69,8 @@ export class BattleMapComponent implements OnInit {
       maxWidth: '100vw',
       data: {
         imageWidth: this.image.nativeElement.width,
-        imageHeight: this.image.nativeElement.height
+        imageHeight: this.image.nativeElement.height,
+        userId: this.userId
       }
     });
 

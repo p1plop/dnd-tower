@@ -42,6 +42,36 @@
       </div>
     </div>
 
+    <div fxLayout="column" fxLayoutAlign="center center" class="image-section">
+      <input #fileInput type="file" accept="image/jpeg,image/png,image/gif" (change)="onFileChanged($event)">
+      
+      <div *ngIf="!imagePreview" class="image-upload">
+        <button mat-raised-button type="button" color="primary" (click)="fileInput.click()">
+          <mat-icon>attach_file</mat-icon>
+          Загрузить изображение
+        </button>
+      </div>
+
+      <div *ngIf="imagePreview" class="image-preview">
+        <img [src]="imagePreview" alt="Preview">
+        <button mat-icon-button color="warn" (click)="deleteImage()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+
+      <div *ngIf="savedImages.length > 0" class="saved-images">
+        <h3>Загруженные изображения</h3>
+        <div class="saved-images-grid">
+          <div *ngFor="let image of savedImages" class="saved-image-item" (click)="selectSavedImage(image)">
+            <img [src]="image.url" alt="Saved image">
+            <button mat-icon-button color="warn" (click)="deleteSavedImage(image, $event)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div fxLayout="row wrap" fxLayoutAlign="center">
       <button type="button" class="color" *ngFor="let item of colors" mat-fab [style.background-color]="item"
         (click)="selectColor(item)">

@@ -6,7 +6,9 @@
       <div *ngFor="let unit of map.units; let i=index" class="unit" cdkDrag
         (cdkDragEnded)="dropUnit($event, i)" cdkDragBoundary=".map" [ngStyle]="getUnitStyle(unit)">
         <div class="unit-label">{{unit.name}}</div>
-        <div class="unit-token" [ngStyle]="getTokenStyle(unit)"></div>
+        <div class="unit-token" [ngStyle]="getTokenStyle(unit)">
+          <img *ngIf="unit.imagePath" [src]="unit.imagePath" [alt]="unit.name">
+        </div>
       </div>
       <p class="no-image" *ngIf="!map.image">Изображение отсутствует</p>
       <img #image *ngIf="map.image" [src]="map.image">

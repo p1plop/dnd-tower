@@ -10,4 +10,6 @@ export interface MapUnit {
   xPosition: number;
 
   yPosition: number;
+
+  imagePath?: string;
 }

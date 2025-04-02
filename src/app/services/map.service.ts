@@ -3,7 +3,13 @@ import { Observable, from } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Map } from '../models/map.model';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, map } from 'rxjs/operators';
+
+interface UnitImage {
+  url: string;
+  timestamp: number;
+  id?: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +41,22 @@ export class MapService {
           image: url,
           units: []
         });
+    });
+  }
+
+  getUnitImages(userId: string): Observable<UnitImage[]> {
+    return this.afs.collection(`users/${userId}/map-units`).snapshotChanges().pipe(
+      map(actions => actions.map(action => ({
+        ...action.payload.doc.data() as UnitImage,
+        id: action.payload.doc.id
+      })))
+    );
+  }
+
+  deleteUnitImage(userId: string, imagePath: string, imageId: string): Promise<void> {
+    const ref = this.afStorage.storage.refFromURL(imagePath);
+    return ref.delete().then(() => {
+      return this.afs.doc(`users/${userId}/map-units/${imageId}`).delete();
     });
   }
 }
