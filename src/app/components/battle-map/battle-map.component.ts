@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EditMapUnitComponent } from '../dialogs/edit-map-unit/edit-map-unit.component';
 import { MapUnit } from 'src/app/models/map-unit.model';
@@ -10,11 +10,10 @@ import { Map } from 'src/app/models/map.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { AvatarUploadComponent } from '../dialogs/avatar-upload/avatar-upload.component';
 
-
 @Component({
   selector: 'app-battle-map',
   templateUrl: './battle-map.component.html',
-  styleUrls: ['./battle-map.component.scss']
+  styleUrls: ['./battle-map.component.scss'],
 })
 export class BattleMapComponent implements OnInit {
   @ViewChild('image') image: ElementRef<HTMLImageElement>;
@@ -51,7 +50,8 @@ export class BattleMapComponent implements OnInit {
       maxWidth: '100vw',
       data: {
         unit: this.map.units[index],
-        userId: this.userId
+        userId: this.userId,
+        isOwner: this.isOwner,
       }
     });
 
@@ -70,7 +70,8 @@ export class BattleMapComponent implements OnInit {
       data: {
         imageWidth: this.image.nativeElement.width,
         imageHeight: this.image.nativeElement.height,
-        userId: this.userId
+        userId: this.userId,
+        isOwner: this.isOwner,
       }
     });
 
@@ -85,6 +86,10 @@ export class BattleMapComponent implements OnInit {
   removeUnit(index: number) {
     this.map.units.splice(index, 1);
     this.mapService.updateMap(this.userId, this.map);
+  }
+
+  getHpPercentage(unit: MapUnit) {
+    return unit.currentHp && unit.maxHp ? unit.currentHp / unit.maxHp * 100 : null;
   }
 
   dropUnit(event: CdkDragEnd, index: number) {
@@ -135,6 +140,33 @@ export class BattleMapComponent implements OnInit {
       'background-color': unit.color,
       'border-radius': `${unit.size}px`
     };
+  }
+
+  getLabelBackgroundColor(unit: MapUnit): string {
+    const percentage = this.getHpPercentage(unit);
+    if (percentage === null) {
+      return 'rgba(0, 0, 0, 0.5)';
+    }
+
+    let r: number;
+    let g: number;
+    let b: number;
+
+    if (percentage >= 50) {
+      // От зеленого к желтому (50-100%)
+      const ratio = (percentage - 50) / 50;
+      r = Math.round(255 * (1 - ratio));
+      g = 255;
+      b = 0;
+    } else {
+      // От желтого к красному (0-50%)
+      const ratio = percentage / 50;
+      r = 255;
+      g = Math.round(255 * ratio);
+      b = 0;
+    }
+
+    return `rgba(${r}, ${g}, ${b}, 0.5)`;
   }
 
   get isOwner(): boolean {

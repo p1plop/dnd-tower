@@ -12,4 +12,8 @@ export interface MapUnit {
   yPosition: number;
 
   imagePath?: string;
+
+  maxHp: number;
+
+  currentHp: number;
 }

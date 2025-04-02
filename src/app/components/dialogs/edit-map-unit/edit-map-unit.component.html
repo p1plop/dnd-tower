@@ -42,6 +42,46 @@
       </div>
     </div>
 
+    <div fxLayout="column" class="hp" *ngIf="data.isOwner">
+      <div class="bold">ОЧКИ ЗДОРОВЬЯ</div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <mat-form-field>
+          <mat-label>Максимальные ОЗ</mat-label>
+          <input matInput type="number" autocomplete="off" formControlName="maxHp">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Текущие ОЗ</mat-label>
+          <input matInput type="number" autocomplete="off" formControlName="currentHp">
+        </mat-form-field>
+      </div>
+
+      <div class="error-message" *ngIf="hpError">
+        {{ hpError }}
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-around">
+        <button mat-mini-fab
+                appLongPress
+                (longPressing)="decreaseCurrentHp()"
+                (click)="decreaseCurrentHp()"
+                type="button"
+                color="primary">
+          <mat-icon>remove</mat-icon>
+        </button>
+
+        <button mat-mini-fab
+                appLongPress
+                (longPressing)="increaseCurrentHp()"
+                (click)="increaseCurrentHp()"
+                type="button"
+                color="primary">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+
     <div fxLayout="column" fxLayoutAlign="center center" class="image-section">
       <input #fileInput type="file" accept="image/jpeg,image/png,image/gif" (change)="onFileChanged($event)">
       

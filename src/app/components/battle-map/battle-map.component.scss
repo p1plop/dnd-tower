@@ -70,13 +70,13 @@
 
   .unit-label {
     color: #fff;
-      padding: 5px;
-      border-radius: 10px;
-      background-color: rgba(0, 0, 0, 0.5);
-      font-size: 14px;
-      text-align: center;
-      text-transform: uppercase;
-      z-index: 1000;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    font-size: 14px;
+    text-align: center;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
   }
 
   .unit-token {

@@ -14,6 +14,7 @@ interface DialogData {
   imageWidth?: number;
   imageHeight?: number;
   userId: string;
+  isOwner: boolean;
 }
 
 interface SavedImage {
@@ -71,7 +72,11 @@ export class EditMapUnitComponent implements OnInit {
       initiative: 0,
       xPosition: 0,
       yPosition: 0,
-      imagePath: ['']
+      imagePath: [''],
+      maxHp: [null, [Validators.min(0)]],
+      currentHp: [null, [Validators.min(0)]]
+    }, {
+      validators: this.hpValidator
     });
 
     if (this.data.unit) {
@@ -85,6 +90,25 @@ export class EditMapUnitComponent implements OnInit {
     }
 
     this.loadSavedImages();
+  }
+
+  private hpValidator(group: FormGroup) {
+    const maxHp = group.get('maxHp').value;
+    const currentHp = group.get('currentHp').value;
+
+    if (currentHp !== null && currentHp > maxHp) {
+      return { hpInvalid: true };
+    }
+
+    return null;
+  }
+
+  get hpError(): string {
+    const errors = this.form.errors;
+    if (errors && errors.hpInvalid) {
+      return 'Текущие ОЗ не могут превышать максимальные ОЗ';
+    }
+    return '';
   }
 
   loadSavedImages() {
@@ -141,6 +165,22 @@ export class EditMapUnitComponent implements OnInit {
 
   get initiative(): FormControl {
     return this.form.get('initiative') as FormControl;
+  }
+
+  get maxHp(): FormControl {
+    return this.form.get('maxHp') as FormControl;
+  }
+
+  get currentHp(): FormControl {
+    return this.form.get('currentHp') as FormControl;
+  }
+
+  decreaseCurrentHp() {
+    this.currentHp.setValue(Math.max(0, this.currentHp.value - 1));
+  }
+
+  increaseCurrentHp() {
+    this.currentHp.setValue(Math.min(this.maxHp.value, this.currentHp.value + 1));
   }
 
   onFileChanged(event) {
